@@ -1,4 +1,4 @@
-NAME = zshanabe.filler
+NAME = lem-in
 FLAGS = -Wall -Wextra -Werror -pedantic -Winit-self -Wunreachable-code -Wformat-y2k -Wformat-nonliteral -Wformat-security -Wformat=2 -Wmissing-include-dirs -Wswitch-default -Wtrigraphs -Wstrict-overflow=5 -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast
 SRC	= start.c
 LIB	= ./libft/libft.a
@@ -8,7 +8,6 @@ all: $(NAME)
 $(NAME): $(FRC)
 	@make -C libft
 	@gcc $(FLAGS) $(SRC) $(LIB) -o $(NAME)
-	@gcc $(FLAGS) -lncurses color.c parse.c -o color $(LIB)
 	@echo "\x1b[32mProject is successfully built!\x1b[0m"	
 
 clean:
@@ -17,7 +16,6 @@ clean:
 fclean: clean
 	@make -C libft fclean
 	@rm -f $(NAME)
-	@rm -f color
 
 re: fclean all
 
