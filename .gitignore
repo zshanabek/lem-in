@@ -1,0 +1,7 @@
+*.o
+*.out
+.vscode/
+*.a
+a.out.*/
+tempCodeRunnerFile.c
+lem-in
