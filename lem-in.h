@@ -8,6 +8,7 @@ typedef struct	s_lem
 	int x;
 	int y;
 	int start_end;
+	struct s_lem *tube;	
 	struct s_lem *next;
 }				t_lem;
 
