@@ -7,7 +7,7 @@ typedef struct	s_lem
 	char *name;
 	int x;
 	int y;
-	int start_end;
+	int type;
 	struct s_lem *tube;	
 	struct s_lem *next;
 }				t_lem;

@@ -2,10 +2,10 @@
 
 void print_struct_members(t_lem *item)
 {
-	ft_printf("se: %d\n", item->start_end);
 	ft_printf("name: %s\n", item->name);
 	ft_printf("x: %d\n", item->x);
 	ft_printf("y: %d\n", item->y);
+	ft_printf("type: %d\n", item->type);
 	// ft_printf("tube to: %s\n", item->tube->name);	
 	ft_printf("========\n");
 }
@@ -36,6 +36,22 @@ t_lem	*ft_lstaddendlem(t_lem *head)
 	return (object);
 }
 
+void 	parse_room(t_lem *room, int type, char *line)
+{
+	int i;
+
+	i = 0;
+	room->type = type;
+	while (line[i] && line[i] != ' ')
+		i++;
+	room->name = ft_strsub(line, 0, i);
+	i++;
+	room->x = ft_atoi(&line[i]);
+	while (line[i] && line[i] != ' ')
+		i++;
+	room->y = ft_atoi(&line[i]);
+}
+
 int	get_start_end(char *line, t_lem *start)
 {
 	t_lem *end;	
@@ -43,23 +59,11 @@ int	get_start_end(char *line, t_lem *start)
 
 	get_next_line(0, &line);
 	get_next_line(0, &line);
-	start->start_end = 1;
-	i = 0;
-	while (line[i] && line[i] != ' ')
-		i++;
-	start->name = ft_strsub(line, 0, i);
-	start->x = ft_atoi(&line[2]);
-	start->y = ft_atoi(&line[4]);
-	get_next_line(0, &line);	
+	parse_room(start, 1, line);
+	get_next_line(0, &line);
 	get_next_line(0, &line);
 	end = ft_lstaddendlem(start);
-	end->start_end = 2;
-	i = 0;
-	while (line[i] && line[i] != ' ')
-		i++;
-	end->name = ft_strsub(line, 0, i);
-	end->x = ft_atoi(&line[2]);
-	end->y = ft_atoi(&line[4]);
+	parse_room(end, 2, line);
 	return (0);
 }
 
@@ -133,13 +137,7 @@ int		main()
 		if (two_spaces(line))
 		{
 			room = ft_lstaddendlem(start);
-			room->start_end = 0;
-			i = 0;
-			while (line[i] && line[i] != ' ')
-				i++;
-			room->name = ft_strsub(line, 0, i);
-			room->x = ft_atoi(&line[2]);
-			room->y = ft_atoi(&line[4]);
+			parse_room(room, 0, line);
 		}
 	}
 	print_list(start);	
