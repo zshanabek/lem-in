@@ -31,23 +31,6 @@ int		get_start_end(char *line, t_room *start)
 	return (0);
 }
 
-int		two_spaces(char *line)
-{
-	int		i;
-	int		count;
-
-	count = 0;
-	i = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ')
-			count++;
-		i++;
-	}
-	if (count == 2)
-		return (1);
-	return (0);
-}
 
 t_room	*search(t_room *head, char *name)
 {
@@ -98,10 +81,13 @@ int		parse_tubes(t_room *head, char *line)
 	t_room		*room;
 	t_sosed		*sosed;
 
-	create_tube(head, line);
+	if (!create_tube(head, line))
+		return (0);
 	while (get_next_line(0, &line))
-		create_tube(head, line);
-	print_struct_members(head);	
+	{
+		if (!create_tube(head, line))
+			return (0);
+	}
 	return (1);
 }
 
@@ -126,6 +112,10 @@ int		main()
 		room = ft_lstaddendroom(start);
 		parse_room(room, 0, line);
 	}
-	parse_tubes(start, line);
+	if (!parse_tubes(start, line))
+	{
+		ft_printf("Error!\n");
+		exit(1);
+	}
 	print_list(start);
 }

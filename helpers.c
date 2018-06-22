@@ -9,13 +9,13 @@ void print_struct_members(t_room *item)
 	ft_printf("y: %d\n", item->y);
 	ft_printf("type: %d\n", item->type);
 	current = item->sosed;
-	ft_printf("%10s\n", "Sosedi");	
+	ft_printf("%8s\n", "Sosedi");	
 	while (current != NULL)
 	{
-		ft_printf("%10s\n", current->room->name);
+		ft_printf("%5s\n", current->room->name);
 		current = current->next;
 	}
-	ft_printf("========\n");
+	ft_printf("=======================\n");
 }
 
 void print_list(t_room *head)
@@ -53,4 +53,22 @@ t_sosed		*ft_lstaddendsosed(t_sosed *head)
 	current->next = malloc(sizeof(t_sosed));
 	current->next->next = NULL;
 	return (current->next);
+}
+
+int		two_spaces(char *line)
+{
+	int		i;
+	int		count;
+
+	count = 0;
+	i = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			count++;
+		i++;
+	}
+	if (count == 2)
+		return (1);
+	return (0);
 }

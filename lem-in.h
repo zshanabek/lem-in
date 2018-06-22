@@ -21,8 +21,10 @@ struct s_sosed
 	t_sosed	*next;
 };
 
+int			two_spaces(char *line);
 void		print_struct_members(t_room *item);
 void		print_list(t_room *head);
 t_room		*ft_lstaddendroom(t_room *head);
 t_sosed		*ft_lstaddendsosed(t_sosed *head);
+
 #endif
