@@ -18,8 +18,8 @@ void 	parse_room(t_room *room, int type, char *line)
 
 int		get_start_end(char *line, t_room *start)
 {
-	t_room *end;	
-	int i;
+	int		i;
+	t_room	*end;	
 
 	get_next_line(0, &line);
 	get_next_line(0, &line);
@@ -81,11 +81,14 @@ int	create_tube(t_room *head, char *line)
 		{
 			sosed = malloc(sizeof(t_sosed));
 			sosed->next = NULL;
+			room->sosed = sosed;			
 		}
 		else
 			sosed = ft_lstaddendsosed(room->sosed);
 		sosed->room = search(head, ft_strsub(line, i, ft_strlen(line)));
 	}
+	else
+		return (0);
 	return (1);
 }
 
@@ -97,18 +100,17 @@ int		parse_tubes(t_room *head, char *line)
 
 	create_tube(head, line);
 	while (get_next_line(0, &line))
-	{
 		create_tube(head, line);
-	}
+	print_struct_members(head);	
 	return (1);
 }
 
 int		main()
 {
-	int		i;	
-	int		ants;	
+	int		i;
+	int		ants;
 	char	*line;
-	t_room	*start;	
+	t_room	*start;
 	t_room	*room;
 
 	line = NULL;
@@ -124,6 +126,6 @@ int		main()
 		room = ft_lstaddendroom(start);
 		parse_room(room, 0, line);
 	}
-	print_list(start);	
 	parse_tubes(start, line);
+	print_list(start);
 }
