@@ -26,18 +26,21 @@ void	parse_rooms(char *line)
 
 	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
 	{
-		if (two_spaces(line) && flag == 1)
+		if (two_spaces(line))
 		{
-			head = malloc(sizeof(t_room));
-			head->next = NULL;
-			head->sosed = NULL;
-			insert_room(head, 0, line);
-			flag = 0;
-		}
-		else if (two_spaces(line) && flag != 1)
-		{
-			item = ft_lstaddendroom(head);
-			insert_room(item, 0, line);
+			if (flag == 1)
+			{
+				head = malloc(sizeof(t_room));
+				head->next = NULL;
+				head->sosed = NULL;
+				insert_room(head, 0, line);
+				flag = 0;
+			}
+			else
+			{
+				item = ft_lstaddendroom(head);
+				insert_room(item, 0, line);
+			}
 		}
 	}
 	print_list(head);
