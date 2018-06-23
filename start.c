@@ -55,10 +55,9 @@ int		main()
 	get_next_line(0, &line);
 	ants = ft_atoi(line);
 	parse_rooms(line);
-	if (!parse_tubes(start, line))
-	{
-		ft_printf("Error!\n");
-		exit(1);
-	}
-	print_list(start);
+	// if (!parse_tubes(start, line))
+	// {
+	// 	ft_printf("Error!\n");
+	// 	exit(1);
+	// }
 }

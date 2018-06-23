@@ -1,20 +1,10 @@
 #include "lem-in.h"
 
-void 	insert_room(t_room *head, int type, int *init, char *line)
+void 	insert_room(t_room *room, int type,  char *line)
 {
 	int i;
-	t_room *room;
 
 	i = 0;
-	if (*init == 1)
-	{
-		room = malloc(sizeof(t_room));
-		room->next = NULL;
-		room->sosed = NULL;
-		*init = 0;		
-	}
-	else
-		room = ft_lstaddendroom(head);
 	room->type = type;
 	while (line[i] && line[i] != ' ')
 		i++;
@@ -26,33 +16,31 @@ void 	insert_room(t_room *head, int type, int *init, char *line)
 	room->y = ft_atoi(&line[i]);
 }
 
-int		parse_rooms(char *line)
-{
-	int		flag;
-	t_room	*room;
-	t_room	*start;
 
+void	parse_rooms(char *line)
+{
+	t_room *head;
+	t_room *item;
+	int flag;
 	flag = 1;
-	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
-	{	
-		if (ft_strstr(line, "##start"))
+
+	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
+	{
+		if (two_spaces(line) && flag == 1)
 		{
-			get_next_line(0, &line);
-			insert_room(room, 1, &flag, line);				
+			head = malloc(sizeof(t_room));
+			head->next = NULL;
+			head->sosed = NULL;
+			insert_room(head, 0, line);
+			flag = 0;
 		}
-		else if (ft_strstr(line, "##end"))
+		else if (two_spaces(line) && flag != 1)
 		{
-			get_next_line(0, &line);
-			insert_room(room, 2, &flag, line);			
-		}
-		else
-		{
-			room = ft_lstaddendroom(start);
-			insert_room(room, 0, &flag, line);
+			item = ft_lstaddendroom(head);
+			insert_room(item, 0, line);
 		}
 	}
-	print_list(start);
-	return (1);
+	print_list(head);
 }
 
 int		parse_tubes(t_room *head, char *line)

@@ -20,8 +20,8 @@ struct s_sosed
 	t_room	*room;
 	t_sosed	*next;
 };
-int			parse_rooms(char *line);
-void		insert_room(t_room *room, int type, char *line);
+void		parse_rooms(char *line);
+void		insert_room(t_room *head, int type, char *line);
 int			create_tube(t_room *head, char *line);
 int			get_start_end(char *line, t_room *start);
 int			parse_tubes(t_room *head, char *line);
