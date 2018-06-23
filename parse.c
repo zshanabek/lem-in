@@ -17,29 +17,73 @@ void 	insert_room(t_room *room, int type,  char *line)
 }
 
 
+
 void	parse_rooms(char *line)
 {
-	t_room *head;
-	t_room *item;
-	int flag;
-	flag = 1;
+	int		flag;	
+	t_room	*head;
+	t_room	*item;
 
+	flag = 1;
 	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
 	{
-		if (two_spaces(line))
+		if (ft_strstr(line, "##start"))
 		{
-			if (flag == 1)
+			get_next_line(0, &line);
+			if (two_spaces(line))
 			{
-				head = malloc(sizeof(t_room));
-				head->next = NULL;
-				head->sosed = NULL;
-				insert_room(head, 0, line);
-				flag = 0;
+				if (flag == 1)
+				{
+					head = malloc(sizeof(t_room));
+					head->next = NULL;
+					head->sosed = NULL;
+					insert_room(head, 1, line);
+					flag = 0;
+				}
+				else
+				{
+					item = ft_lstaddendroom(head);
+					insert_room(item, 1, line);
+				}
 			}
-			else
+		}
+		else if (ft_strstr(line, "##end"))
+		{
+			get_next_line(0, &line);
+			if (two_spaces(line))
 			{
-				item = ft_lstaddendroom(head);
-				insert_room(item, 0, line);
+				if (flag == 1)
+				{
+					head = malloc(sizeof(t_room));
+					head->next = NULL;
+					head->sosed = NULL;
+					insert_room(head, 2, line);
+					flag = 0;
+				}
+				else
+				{
+					item = ft_lstaddendroom(head);
+					insert_room(item, 2, line);
+				}
+			}
+		}
+		else
+		{
+			if (two_spaces(line))
+			{
+				if (flag == 1)
+				{
+					head = malloc(sizeof(t_room));
+					head->next = NULL;
+					head->sosed = NULL;
+					insert_room(head, 0, line);
+					flag = 0;
+				}
+				else
+				{
+					item = ft_lstaddendroom(head);
+					insert_room(item, 0, line);
+				}
 			}
 		}
 	}
