@@ -40,13 +40,14 @@ t_room	*identify_room(t_room *head, int *flag, int type,  char *line)
 	return (0);
 }
 
-t_room	*parse_rooms(char *line)
+t_room	*parse_farm(char *line)
 {
 	int		flag;	
 	t_room	*head;
 	t_room	*item;
 
 	flag = 1;
+	get_next_line(0, &line);
 	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
 	{
 		if (ft_strstr(line, "##start"))
@@ -73,22 +74,10 @@ t_room	*parse_rooms(char *line)
 				identify_room(head, &flag, 0, line);
 		}
 	}
-	print_list(head);
-	return (head);
-}
-
-int		parse_tubes(t_room *head, char *line)
-{
-	int			i;
-	t_room		*room;
-	t_sosed		*sosed;
-
-	if (!create_tube(head, line))
-		return (0);
-	while (get_next_line(0, &line))
+	if (!parse_tubes(head, line))
 	{
-		if (!create_tube(head, line))
-			return (0);
+		ft_printf("Error!\n");
+		exit(1);
 	}
-	return (1);
+	return (head);
 }

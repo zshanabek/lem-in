@@ -20,9 +20,8 @@ struct s_sosed
 	t_room	*room;
 	t_sosed	*next;
 };
-t_room		*parse_rooms(char *line);
-int			create_tube(t_room *head, char *line);
-int			get_start_end(char *line, t_room *start);
+
+t_room		*parse_farm(char *line);
 int			parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
 void		print_struct_members(t_room *item);
