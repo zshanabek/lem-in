@@ -16,9 +16,31 @@ void 	insert_room(t_room *room, int type,  char *line)
 	room->y = ft_atoi(&line[i]);
 }
 
+t_room	*identify_room(t_room *head, int *flag, int type,  char *line)
+{
+	t_room *item;
 
+	if (two_spaces(line))
+	{
+		if (*flag == 1)
+		{
+			head = malloc(sizeof(t_room));
+			head->next = NULL;
+			head->sosed = NULL;
+			insert_room(head, type, line);
+			*flag = 0;
+			return (head);
+		}
+		else
+		{
+			item = ft_lstaddendroom(head);
+			insert_room(item, type, line);
+		}
+	}
+	return (0);
+}
 
-void	parse_rooms(char *line)
+t_room	*parse_rooms(char *line)
 {
 	int		flag;	
 	t_room	*head;
@@ -30,64 +52,29 @@ void	parse_rooms(char *line)
 		if (ft_strstr(line, "##start"))
 		{
 			get_next_line(0, &line);
-			if (two_spaces(line))
-			{
-				if (flag == 1)
-				{
-					head = malloc(sizeof(t_room));
-					head->next = NULL;
-					head->sosed = NULL;
-					insert_room(head, 1, line);
-					flag = 0;
-				}
-				else
-				{
-					item = ft_lstaddendroom(head);
-					insert_room(item, 1, line);
-				}
-			}
+			if (flag == 1)
+				head = identify_room(head, &flag, 1, line);
+			else
+				identify_room(head, &flag, 1, line);
 		}
 		else if (ft_strstr(line, "##end"))
 		{
 			get_next_line(0, &line);
-			if (two_spaces(line))
-			{
-				if (flag == 1)
-				{
-					head = malloc(sizeof(t_room));
-					head->next = NULL;
-					head->sosed = NULL;
-					insert_room(head, 2, line);
-					flag = 0;
-				}
-				else
-				{
-					item = ft_lstaddendroom(head);
-					insert_room(item, 2, line);
-				}
-			}
+			if (flag == 1)
+				head = identify_room(head, &flag, 2, line);
+			else
+				identify_room(head, &flag, 2, line);
 		}
 		else
 		{
-			if (two_spaces(line))
-			{
-				if (flag == 1)
-				{
-					head = malloc(sizeof(t_room));
-					head->next = NULL;
-					head->sosed = NULL;
-					insert_room(head, 0, line);
-					flag = 0;
-				}
-				else
-				{
-					item = ft_lstaddendroom(head);
-					insert_room(item, 0, line);
-				}
-			}
+			if (flag == 1)
+				head = identify_room(head, &flag, 0, line);
+			else
+				identify_room(head, &flag, 0, line);
 		}
 	}
 	print_list(head);
+	return (head);
 }
 
 int		parse_tubes(t_room *head, char *line)
