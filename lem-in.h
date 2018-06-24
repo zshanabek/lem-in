@@ -10,6 +10,7 @@ struct	s_room
 	char		*name;
 	int			x;
 	int			y;
+	int			id;
 	int			type;
 	t_sosed		*sosed;	
 	t_room		*next;

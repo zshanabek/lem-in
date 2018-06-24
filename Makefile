@@ -1,6 +1,9 @@
 NAME = lem-in
-FLAGS = -Wall -Wextra -Werror -pedantic -Winit-self -Wunreachable-code -Wformat-y2k -Wformat-nonliteral -Wformat-security -Wformat=2 -Wmissing-include-dirs -Wswitch-default -Wtrigraphs -Wstrict-overflow=5 -Wfloat-equal -Wundef -Wshadow -Wbad-function-cast
-SRC	= start.c
+FLAGS = -Wall -Wextra -Werror -Winit-self -Wunreachable-code -Wformat-y2k	   \
+-Wformat-nonliteral -Wformat-security -Wformat=2 -Wmissing-include-dirs 	   \
+-Wswitch-default -Wtrigraphs -Wstrict-overflow=5 -Wfloat-equal -Wundef		   \
+-Wshadow -Wbad-function-cast
+SRC	= start.c room_parse.c tube_parse.c helpers.c
 LIB	= ./libft/libft.a
 
 all: $(NAME)

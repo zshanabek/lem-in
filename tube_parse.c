@@ -45,10 +45,6 @@ int	create_tube(t_room *head, char *line)
 
 int		parse_tubes(t_room *head, char *line)
 {
-	int			i;
-	t_room		*room;
-	t_sosed		*sosed;
-
 	if (!create_tube(head, line))
 	{
 		return (0);

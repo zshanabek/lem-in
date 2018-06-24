@@ -5,9 +5,10 @@ void print_struct_members(t_room *item)
 	t_sosed *current;
 
 	ft_printf("name: %s\n", item->name);
+	ft_printf("id: %d\n", item->id);	
+	ft_printf("type: %d\n", item->type);
 	ft_printf("x: %d\n", item->x);
 	ft_printf("y: %d\n", item->y);
-	ft_printf("type: %d\n", item->type);
 	current = item->sosed;
 	ft_printf("%8s\n", "Sosedi");	
 	while (current != NULL)
