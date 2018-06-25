@@ -23,7 +23,7 @@ void	fill_matrix(t_room *start, int **matrix, int len)
 				matrix[cur->id][scur->room->id] = 1;
 				matrix[scur->room->id][cur->id] = 1;
 				scur = scur->next;
-			}	
+			}
 		}
   		cur = cur->next;
   	}

@@ -78,10 +78,6 @@ t_room	*parse_farm(char *line)
 				identify_room(head, &flag, &id, 0, line);
 		}
 	}
-	if (!parse_tubes(head, line))
-	{
-		ft_printf("Error!\n");
-		exit(1);
-	}
+	parse_tubes(head, line);
 	return (head);
 }
