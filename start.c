@@ -66,13 +66,16 @@ void	bfs_search(int **matrix, int len)
 	while (q < len)
 	{
 		if (search_connections(matrix, queue[q], len, visited, queue))
+		{
 			visited[z] = queue[q];
+			z++;
+		}
 		ft_printf("que: %d\n", queue[q]);
+		ft_printf("z: %d\n", z);		
 		ft_print1dintarr(queue, len);
 		ft_print1dintarr(visited, len);
 		ft_printf("===============\n");
 		q++;
-		z++;
 	}
 
 }
@@ -86,7 +89,7 @@ int		main()
 
 	line = NULL;
 	start = parse_farm(line);
-	print_list(start);
+	// print_list(start);
 	len = list_length(start);
 	matrix = ft_create2dintarr(len, len);
 	fill_matrix(start, matrix, len);
