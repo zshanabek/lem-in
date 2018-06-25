@@ -1,52 +1,63 @@
 #include "lem-in.h"
 
-int		list_length(t_room *item)
-{
-	int		size;	
-	t_room	*cur;
-
-	size = 0;
-	cur = item;  	
-  	while (cur != NULL)
-  	{
-  	  size++;
-  	  cur = cur->next;
-  	}
-  	return (size);
-}
-
-void	iterate_matrix(t_room *start, int **matrix, int len)
+int		is_in_array(int num, int *arr, int len)
 {
 	int i;
-	int j;
-	t_room	*cur;
-	t_sosed	*scur;	
 
 	i = -1;
-	while (++i < len && (j = -1))
-		while (++j < len)
-			matrix[i][j] = 0;
+	while (++i < len)
+		if (arr[i] == num)
+			return (1);
+	return (0);
+}
 
-	cur = start;
-	while (cur != NULL)
-  	{
-		if (cur->sosed != NULL)
+void	search_connections(int **matrix, int *h, int len, int *visited, int *queue)
+{
+	int col;
+	int row;
+
+	row = queue[*h];
+	col = 0;
+	while(col < len)
+	{
+		if (matrix[row][col] == 1)
 		{
-			scur = cur->sosed;
-			while (scur != NULL)
+			if (!is_in_array(col, visited, len) && !is_in_array(col, queue, len))
 			{
-				matrix[cur->id][scur->room->id] = 1;
-				scur = scur->next;
-			}	
+				queue[*h] = col;
+				(*h)++;
+			}
 		}
-  		cur = cur->next;
-  	}
-	ft_print2dintarr(matrix, len);
+		col++;
+	}
+}
+
+void	bfs_search(int **matrix, int len)
+{
+	int visited[len];
+	int queue[len];
+	int z;
+	int h;	
+
+	z = 0;
+	h = 0;
+	while (z < len)
+	{
+		visited[z] = -1;
+		queue[z] = -1;
+		z++;	
+	}
+	z = 0;	
+	visited[z] = 0;
+	queue[h] = 0;
+	search_connections(matrix, &h, len, visited, queue);
+	ft_print1dintarr(queue, len);
+	ft_print1dintarr(visited, len);
 }
 
 int		main()
 {
-	int		len;	
+	int		len;
 	char	*line;
 	int		**matrix;
 	t_room	*start;
@@ -55,5 +66,7 @@ int		main()
 	start = parse_farm(line);
 	len = list_length(start);
 	matrix = ft_create2dintarr(len, len);
-	iterate_matrix(start, matrix, len);
+	fill_matrix(start, matrix, len);
+	ft_print2dintarr(matrix, len);
+	bfs_search(matrix, len);
 }

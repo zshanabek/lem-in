@@ -73,3 +73,18 @@ int		two_spaces(char *line)
 		return (1);
 	return (0);
 }
+
+int		list_length(t_room *item)
+{
+	int		size;	
+	t_room	*cur;
+
+	size = 0;
+	cur = item;  	
+  	while (cur != NULL)
+  	{
+  	  size++;
+  	  cur = cur->next;
+  	}
+  	return (size);
+}
