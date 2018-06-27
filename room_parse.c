@@ -15,7 +15,6 @@ void 	insert_room(t_room *room, int type, int *id, char *line)
 		i++;
 	room->y = ft_atoi(&line[i]);
 	room->id = *id;
-	room->sosed = NULL;
 	(*id)++;
 }
 
@@ -27,11 +26,11 @@ t_room	*identify_room(t_room *head, int *flag, int *id, int type, char *line)
 	{
 		if (*flag == 1)
 		{
+			*flag = 0;			
 			head = malloc(sizeof(t_room));
 			head->next = NULL;
 			head->sosed = NULL;
 			insert_room(head, type, id, line);
-			*flag = 0;
 			return (head);
 		}
 		else
@@ -78,6 +77,10 @@ t_room	*parse_farm(char *line)
 				identify_room(head, &flag, &id, 0, line);
 		}
 	}
-	parse_tubes(head, line);
+	if (parse_tubes(head, line) == 0)
+	{
+		ft_printf("Error");
+		exit(1);
+	}
 	return (head);
 }

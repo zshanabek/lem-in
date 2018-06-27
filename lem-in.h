@@ -31,4 +31,5 @@ t_room		*ft_lstaddendroom(t_room *head);
 t_sosed		*ft_lstaddendsosed(t_sosed *head);
 int			list_length(t_room *item);
 void		fill_matrix(t_room *start, int **matrix, int len);
+void		bfs_search(int **matrix, int len);
 #endif
