@@ -23,22 +23,20 @@ void	add_to_queue(int *arr, int num, int len)
 
 int		search_connections(int **matrix, int num, int len, int *visited, int *queue)
 {
-	int col;
-	int row;
-	int bar;
+	int		col;
+	int		bar;
 
-	row = num;
 	col = 0;
-	bar = 0;	
+	bar = 0;
 	while (col < len)
 	{
-		if (matrix[row][col] == 1)
+		if (matrix[num][col] == 1)
 		{
 			if (!is_in_array(col, visited, len) && !is_in_array(col, queue, len))
 			{
 				add_to_queue(queue, col, len);
 				bar = 1;
-			}	
+			}
 		}
 		col++;
 	}
