@@ -10,9 +10,11 @@ struct	s_room
 	char		*name;
 	int			x;
 	int			y;
-	int			id;
 	int			type;
-	t_sosed		*sosed;	
+	int			is_visited;
+	int			is_busy;
+	int 		*way;
+	t_sosed		*sosed;
 	t_room		*next;
 };
 
@@ -31,5 +33,5 @@ t_room		*ft_lstaddendroom(t_room *head);
 t_sosed		*ft_lstaddendsosed(t_sosed *head);
 int			list_length(t_room *item);
 void		fill_matrix(t_room *start, int **matrix, int len);
-void		bfs_search(int **matrix, int len);
+void		bfs_search(t_room *start, int len);
 #endif

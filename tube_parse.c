@@ -14,7 +14,7 @@ t_room	*search(t_room *head, char *name)
 	return (0);
 }
 
-int	create_tube(t_room *head, char *line)
+int		create_tube(t_room *head, char *line)
 {
 	int			i;	
 	t_room		*room;

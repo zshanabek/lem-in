@@ -14,7 +14,6 @@ void 	insert_room(t_room *room, int type, int *id, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	room->y = ft_atoi(&line[i]);
-	room->id = *id;
 	(*id)++;
 }
 

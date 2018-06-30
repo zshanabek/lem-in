@@ -4,20 +4,19 @@ void print_struct_members(t_room *item)
 {
 	t_sosed *current;
 
-	ft_printf("%d)\n", item->id);
 	ft_printf("name: %s\n", item->name);
 	ft_printf("type: %d\n", item->type);
 	// ft_printf("x: %d\n", item->x);
 	// ft_printf("y: %d\n", item->y);
 	current = item->sosed;
 	if (item->sosed != NULL)
-		ft_printf("%s\n", "Sosedi:");
+		ft_printf("Sosedi: ");
 	while (current != NULL)
 	{
-		ft_printf("%7s\n", current->room->name);
+		ft_printf("%s ", current->room->name);
 		current = current->next;
 	}
-	ft_printf("===========\n");
+	ft_printf("\n===========\n");
 }
 
 void print_list(t_room *head)
@@ -88,32 +87,4 @@ int		list_length(t_room *item)
   	  cur = cur->next;
   	}
   	return (size);
-}
-
-void	fill_matrix(t_room *start, int **matrix, int len)
-{
-	int i;
-	int j;
-	t_room	*cur;
-	t_sosed	*scur;	
-
-	i = -1;
-	while (++i < len && (j = -1))
-		while (++j < len)
-			matrix[i][j] = 0;
-	cur = start;
-	while (cur != NULL)
-  	{
-		if (cur->sosed != NULL)
-		{
-			scur = cur->sosed;
-			while (scur != NULL)
-			{
-				matrix[cur->id][scur->room->id] = 1;
-				matrix[scur->room->id][cur->id] = 1;
-				scur = scur->next;
-			}
-		}
-  		cur = cur->next;
-  	}
 }

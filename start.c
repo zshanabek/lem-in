@@ -11,8 +11,5 @@ int		main()
 	start = parse_farm(line);
 	print_list(start);
 	len = list_length(start);
-	matrix = ft_create2dintarr(len, len);
-	fill_matrix(start, matrix, len);
-	ft_print2dintarr(matrix, len);
-	bfs_search(matrix, len);
+	bfs_search(start, len);
 }
