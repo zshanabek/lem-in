@@ -6,6 +6,7 @@ void print_struct_members(t_room *item)
 
 	ft_printf("name: %s\n", item->name);
 	ft_printf("type: %d\n", item->type);
+	ft_printf("id: %d\n", item->id);	
 	// ft_printf("x: %d\n", item->x);
 	// ft_printf("y: %d\n", item->y);
 	current = item->sosed;
@@ -39,6 +40,9 @@ t_room		*ft_lstaddendroom(t_room *head)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = malloc(sizeof(t_room));
+	current->next->is_visited = 0;
+	current->next->is_busy = 0;	
+	current->next->id = 0;
 	current->next->sosed = NULL;
 	current->next->next = NULL;
 	return (current->next);

@@ -9,7 +9,6 @@ int		main()
 
 	line = NULL;
 	start = parse_farm(line);
-	print_list(start);
 	len = list_length(start);
 	bfs_search(start, len);
 }

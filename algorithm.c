@@ -1,17 +1,17 @@
 #include "lem-in.h"
 
-int		is_in_array(char *name, int *arr, int len)
+int		is_in_array(int num, int *arr, int len)
 {
 	int i;
 
 	i = -1;
 	while (++i < len)
-		if (ft_strequ(arr[i], name))
+		if (arr[i] == num)
 			return (1);
 	return (0);
 }
 
-void	add_to_queue(int *arr, int num, int len)
+void	enqueue(int num, int *arr, int len)
 {
 	int i;
 
@@ -21,15 +21,54 @@ void	add_to_queue(int *arr, int num, int len)
 	arr[i] = num;
 }
 
-void	search_connection(t_room *start, int *visited, int *queue, int len)
+t_room	*find_by_id(t_room *start, int id)
 {
+	t_room *cur;
 
+	cur = start;
+	while (cur != NULL)
+	{
+		if (cur->id == id)
+			return (cur);
+		cur = cur->next;
+	}
+	return (0);
+}
+
+void	iterate_list(t_room *start)
+{
+	t_room	*cur;
+	int		i;
+
+	i = 0;
+	cur = start;
+	while (cur != NULL)
+	{
+		cur->id = i;
+		i++;
+		cur = cur->next;
+	}
+}
+
+void ok(t_room *start, int *queue, int num, int len)
+{
+	t_room		*cur;
+	t_sosed		*scur;
+
+	cur = find_by_id(start, num);
+	scur = cur->sosed;
+	while (scur != NULL)
+	{
+		if (!is_in_array(scur->room->id, queue, len))
+			enqueue(scur->room->id, queue, len);
+		scur = scur->next;
+	}
 }
 
 void	bfs_search(t_room *start, int len)
 {
 	int			i;
-	int			queue[len];
+	int 		queue[len];
 	t_room		*cur;
 	t_sosed		*scur;
 
@@ -39,5 +78,13 @@ void	bfs_search(t_room *start, int len)
 		queue[i] = -1;
 		i++;
 	}
-	
+	iterate_list(start);
+	i = 0;	
+	queue[i] = 0;
+	while (i < len)
+	{
+		ok(start, queue, queue[i], len);
+		i++;
+	}
+	ft_print1dintarr(queue, len);	
 }
