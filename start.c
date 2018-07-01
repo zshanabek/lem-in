@@ -3,7 +3,6 @@
 int		main()
 {
 	int		len; 
-	int		**matrix;
 	char	*line;	
 	t_room	*start;
 
