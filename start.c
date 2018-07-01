@@ -2,7 +2,7 @@
 
 int		main()
 {
-	int		len;
+	int		len; 
 	int		**matrix;
 	char	*line;	
 	t_room	*start;
@@ -10,5 +10,6 @@ int		main()
 	line = NULL;
 	start = parse_farm(line);
 	len = list_length(start);
-	bfs_search(start, len);
+	iterate_list(start, len);
+	algorithm(start, len);
 }

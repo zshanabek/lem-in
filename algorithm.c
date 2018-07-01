@@ -35,37 +35,55 @@ t_room	*find_by_id(t_room *start, int id)
 	return (0);
 }
 
-void	iterate_list(t_room *start)
+void	iterate_list(t_room *start, int len)
 {
-	t_room	*cur;
 	int		i;
+	int		*way;
+	int 	*path;
+	t_room	*cur;
 
+	i = 0;
+	way = malloc(sizeof(int) * len);
+	while (i < len)
+	{
+		way[i] = -1;
+		i++;
+	}
 	i = 0;
 	cur = start;
 	while (cur != NULL)
 	{
 		cur->id = i;
-		i++;
+		cur->way = way;
 		cur = cur->next;
+		i++;		
 	}
 }
 
-void ok(t_room *start, int *queue, int num, int len)
+int		bfs(t_room *start, int *queue, int num, int len)
 {
 	t_room		*cur;
 	t_sosed		*scur;
 
 	cur = find_by_id(start, num);
+	cur->is_visited = 1;
 	scur = cur->sosed;
 	while (scur != NULL)
 	{
-		if (!is_in_array(scur->room->id, queue, len))
+		if (!is_in_array(scur->room->id, queue, len) && scur->room->is_visited == 0)
+		{
 			enqueue(scur->room->id, queue, len);
+			scur->room->from = num;
+			// scur->room->way = ft_memccpy();	
+		}
+		if (scur->room->type == 2)
+			return (0);
 		scur = scur->next;
 	}
+	return (1);
 }
 
-void	bfs_search(t_room *start, int len)
+void	algorithm(t_room *start, int len)
 {
 	int			i;
 	int 		queue[len];
@@ -78,13 +96,10 @@ void	bfs_search(t_room *start, int len)
 		queue[i] = -1;
 		i++;
 	}
-	iterate_list(start);
-	i = 0;	
+	i = 0;
 	queue[i] = 0;
-	while (i < len)
-	{
-		ok(start, queue, queue[i], len);
+	while (i < len && bfs(start, queue, queue[i], len))
 		i++;
-	}
-	ft_print1dintarr(queue, len);	
+	ft_print1dintarr(queue, len);
+	print_list(start);
 }

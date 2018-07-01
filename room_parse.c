@@ -29,6 +29,9 @@ t_room	*identify_room(t_room *head, int *flag, int *id, int type, char *line)
 			head = malloc(sizeof(t_room));
 			head->next = NULL;
 			head->sosed = NULL;
+			head->is_visited = 0;
+			head->is_closed = 0;	
+			head->id = 0;
 			insert_room(head, type, id, line);
 			return (head);
 		}

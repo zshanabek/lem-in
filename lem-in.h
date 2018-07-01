@@ -12,8 +12,10 @@ struct	s_room
 	int			y;
 	int 		id;
 	int			type;
+	int			from;
+	char		*charfrom;	
 	int			is_visited;
-	int			is_busy;
+	int			is_closed;
 	int 		*way;
 	t_sosed		*sosed;
 	t_room		*next;
@@ -34,5 +36,6 @@ t_room		*ft_lstaddendroom(t_room *head);
 t_sosed		*ft_lstaddendsosed(t_sosed *head);
 int			list_length(t_room *item);
 void		fill_matrix(t_room *start, int **matrix, int len);
-void		bfs_search(t_room *start, int len);
+void		algorithm(t_room *start, int len);
+void		iterate_list(t_room *start, int len);
 #endif
