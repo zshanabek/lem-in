@@ -64,7 +64,6 @@ int		bfs(t_room *start, int *queue, int num, int len)
 {
 	t_room		*cur;
 	t_sosed		*scur;
-	int			i;
 
 	cur = find_by_id(start, num);
 	cur->is_visited = 1;
@@ -76,12 +75,7 @@ int		bfs(t_room *start, int *queue, int num, int len)
 		if (!is_in_array(scur->room->id, queue, len) && scur->room->is_visited == 0)
 		{
 			enqueue(scur->room->id, queue, len);
-			i = 0;
-			while (i < len)
-			{
-				scur->room->way[i] = cur->way[i];
-				i++;
-			}
+			ft_intcpy(scur->room->way, cur->way, len);
 			enqueue(cur->id, scur->room->way, len);
 		}
 		scur = scur->next;
