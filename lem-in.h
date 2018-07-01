@@ -12,8 +12,6 @@ struct	s_room
 	int			y;
 	int 		id;
 	int			type;
-	int			from;
-	char		*charfrom;	
 	int			is_visited;
 	int			is_closed;
 	int 		*way;
@@ -30,8 +28,8 @@ struct s_sosed
 t_room		*parse_farm(char *line);
 int			parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
-void		print_struct_members(t_room *item);
-void		print_list(t_room *head);
+void		print_struct_members(t_room *item, int len);
+void		print_list(t_room *head, int len);
 t_room		*ft_lstaddendroom(t_room *head);
 t_sosed		*ft_lstaddendsosed(t_sosed *head);
 int			list_length(t_room *item);

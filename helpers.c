@@ -1,41 +1,39 @@
 #include "lem-in.h"
 
-void print_struct_members(t_room *item)
+void	print_struct_members(t_room *item, int len)
 {
 	t_sosed *current;
 
+	ft_printf("id: %d\n", item->id);
 	ft_printf("name: %s\n", item->name);
-	ft_printf("type: %d\n", item->type);
-	ft_printf("id: %d\n", item->id);	
-	// ft_printf("from: %d\n", item->from);
-	// ft_printf("x: %d\n", item->x);
-	// ft_printf("y: %d\n", item->y);
+	ft_printf("way: ");
+	ft_print1dintarr(item->way, len);	
 	current = item->sosed;
-	if (item->sosed != NULL)
-		ft_printf("Sosedi: ");
-	while (current != NULL)
-	{
-		ft_printf("%s ", current->room->name);
-		current = current->next;
-	}
-	ft_printf("\n===========\n");
+	// if (item->sosed != NULL)
+	// 	ft_printf("Sosedi: ");
+	// while (current != NULL)
+	// {
+	// 	ft_printf("%s ", current->room->name);
+	// 	current = current->next;
+	// }
+	ft_printf("==========================\n");
 }
 
-void print_list(t_room *head)
+void print_list(t_room *head, int len)
 {
 	t_room *current;
 
 	current = head;
 	while (current != NULL)
 	{
-		print_struct_members(current);
+		print_struct_members(current, len);
 		current = current->next;
 	}
 }
 
 t_room		*ft_lstaddendroom(t_room *head)
 {
-	t_room *current;
+	t_room	*current;
 
 	current = head;
 	while (current->next != NULL)
