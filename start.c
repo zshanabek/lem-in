@@ -1,9 +1,9 @@
 #include "lem-in.h"
 
-int		main()
+int		main(void)
 {
-	int		len; 
-	char	*line;	
+	int		len;
+	char	*line;
 	t_room	*start;
 
 	line = NULL;

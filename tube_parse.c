@@ -2,13 +2,13 @@
 
 t_room	*search(t_room *head, char *name)
 {
-    t_room *current;
+	t_room *current;
 
 	current = head;
 	while (current != NULL)
 	{
 		if (ft_strequ(current->name, name))
-        	return (current);
+			return (current);
 		current = current->next;
 	}
 	return (0);
@@ -16,13 +16,13 @@ t_room	*search(t_room *head, char *name)
 
 int		create_tube(t_room *head, char *line)
 {
-	int			i;	
+	int			i;
 	t_room		*room;
 	t_sosed		*sosed;
 
 	i = 0;
 	while (line[i] && line[i] != '-')
-			i++;
+		i++;
 	if ((room = search(head, ft_strsub(line, 0, i))) == 0)
 		return (0);
 	i++;
@@ -32,7 +32,7 @@ int		create_tube(t_room *head, char *line)
 		{
 			sosed = malloc(sizeof(t_sosed));
 			sosed->next = NULL;
-			room->sosed = sosed;			
+			room->sosed = sosed;
 		}
 		else
 			sosed = ft_lstaddendsosed(room->sosed);

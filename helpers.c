@@ -1,25 +1,25 @@
 #include "lem-in.h"
 
-void	print_struct_members(t_room *item, int len)
+void		print_struct_members(t_room *item, int len)
 {
 	t_sosed *current;
 
 	ft_printf("id: %d\n", item->id);
 	ft_printf("name: %s\n", item->name);
 	ft_printf("way: ");
-	ft_print1dintarr(item->way, len);	
+	ft_print1dintarr(item->way, len);
 	current = item->sosed;
-	// if (item->sosed != NULL)
-	// 	ft_printf("Sosedi: ");
-	// while (current != NULL)
-	// {
-	// 	ft_printf("%s ", current->room->name);
-	// 	current = current->next;
-	// }
+	if (item->sosed != NULL)
+		ft_printf("Sosedi: ");
+	while (current != NULL)
+	{
+		ft_printf("%s ", current->room->name);
+		current = current->next;
+	}
 	ft_printf("==========================\n");
 }
 
-void print_list(t_room *head, int len)
+void		print_list(t_room *head, int len)
 {
 	t_room *current;
 
@@ -40,7 +40,7 @@ t_room		*ft_lstaddendroom(t_room *head)
 		current = current->next;
 	current->next = malloc(sizeof(t_room));
 	current->next->is_visited = 0;
-	current->next->is_closed = 0;	
+	current->next->is_closed = 0;
 	current->next->id = 0;
 	current->next->sosed = NULL;
 	current->next->next = NULL;
@@ -59,7 +59,7 @@ t_sosed		*ft_lstaddendsosed(t_sosed *head)
 	return (current->next);
 }
 
-int		two_spaces(char *line)
+int			two_spaces(char *line)
 {
 	int		i;
 	int		count;
@@ -77,17 +77,17 @@ int		two_spaces(char *line)
 	return (0);
 }
 
-int		list_length(t_room *item)
+int			list_length(t_room *item)
 {
-	int		size;	
+	int		size;
 	t_room	*cur;
 
 	size = 0;
-	cur = item;  	
-  	while (cur != NULL)
-  	{
-  	  size++;
-  	  cur = cur->next;
-  	}
-  	return (size);
+	cur = item;
+	while (cur != NULL)
+	{
+		size++;
+		cur = cur->next;
+	}
+	return (size);
 }

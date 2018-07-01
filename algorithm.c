@@ -56,7 +56,7 @@ void	iterate_list(t_room *start, int len)
 		cur->way = way;
 		cur->id = i;
 		cur = cur->next;
-		i++;		
+		i++;
 	}
 }
 
@@ -72,7 +72,7 @@ int		bfs(t_room *start, int *queue, int num, int len)
 	{
 		if (scur->room->type == 2)
 			return (0);
-		if (!is_in_array(scur->room->id, queue, len) && scur->room->is_visited == 0)
+		if (!is_in_array(scur->room->id, queue, len) && scur->room->is_visited != 1)
 		{
 			enqueue(scur->room->id, queue, len);
 			ft_intcpy(scur->room->way, cur->way, len);
@@ -86,7 +86,7 @@ int		bfs(t_room *start, int *queue, int num, int len)
 void	algorithm(t_room *start, int len)
 {
 	int			i;
-	int 		queue[len];
+	int			queue[len];
 
 	i = 0;
 	while (i < len)
@@ -98,5 +98,5 @@ void	algorithm(t_room *start, int len)
 	queue[i] = 0;
 	while (i < len && bfs(start, queue, queue[i], len))
 		i++;
-	print_list(start, len);	
+	print_list(start, len);
 }
