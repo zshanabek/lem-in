@@ -72,6 +72,40 @@ t_sosed		*ft_lstaddendsosed(t_sosed *head)
 	return (current->next);
 }
 
+
+t_ants	*ft_lstaddendant(t_ants *head)
+{
+	t_ants	*current;
+
+	current = head;
+	while (current->next != NULL)
+		current = current->next;
+	current->next = malloc(sizeof(t_ants));
+	current->next->pos = 0;
+	current->next->next = NULL;
+	return (current->next);
+}
+
+t_ants *create_ants_list(int amount)
+{
+	int		i;	
+	t_ants	*start;
+	t_ants	*ant;
+
+	i = 1;
+	start = malloc(sizeof(t_ants *));
+	start->id = 0;
+	start->pos = 0;
+	start->next = NULL;
+	while (i < amount)
+	{
+		ant = ft_lstaddendant(start);
+		ant->id = i;
+		i++;
+	}
+	return (start);
+}
+
 int			two_spaces(char *line)
 {
 	int		i;

@@ -43,12 +43,14 @@ t_room	*identify_room(t_room *head, int *flag, int type, char *line)
 	return (0);
 }
 
-t_room	*parse_farm(char *line, int *ants)
+t_room	*parse_farm(int *ants)
 {
 	int		id;
 	int		flag;
 	t_room	*head;
+	char	*line;
 
+	line = NULL;
 	id = 0;
 	flag = 1;
 	get_next_line(0, &line);
