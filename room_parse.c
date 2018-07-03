@@ -47,8 +47,8 @@ t_room	*parse_farm(int *ants)
 {
 	int		id;
 	int		flag;
-	t_room	*head;
 	char	*line;
+	t_room	*head;
 
 	line = NULL;
 	id = 0;

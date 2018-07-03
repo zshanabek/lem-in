@@ -52,7 +52,10 @@ int		bfs(t_room *start, int *queue, int num, int len)
 			enqueue(cur->id, scur->room->way, len);
 		}
 		if (scur->room->type == 2)
+		{
+			enqueue(scur->room->id, scur->room->way, len);			
 			return (0);
+		}
 		scur = scur->next;
 	}
 	return (1);

@@ -28,7 +28,7 @@ struct s_sosed
 
 struct s_ants
 {
-	int		id;	
+	int		id;
 	int		pos;
 	t_ants	*next;
 };

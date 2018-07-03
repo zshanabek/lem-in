@@ -6,6 +6,7 @@ void		print_struct_members(t_room *item, int len)
 
 	ft_printf("id: %d\n", item->id);
 	ft_printf("name: %s\n", item->name);
+	ft_printf("type: %d\n", item->type);	
 	ft_printf("way: ");
 	ft_print1dintarr(item->way, len);
 	current = item->sosed;
@@ -16,7 +17,7 @@ void		print_struct_members(t_room *item, int len)
 		ft_printf("%s ", current->room->name);
 		current = current->next;
 	}
-	ft_printf("==========================\n");
+	ft_printf("\n==========================\n");
 }
 
 void		print_list(t_room *head, int len)
