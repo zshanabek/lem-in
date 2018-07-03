@@ -4,6 +4,7 @@
 
 typedef struct s_sosed t_sosed;
 typedef struct s_room t_room;
+typedef struct s_ants t_ants;
 
 struct	s_room
 {
@@ -25,11 +26,19 @@ struct s_sosed
 	t_sosed	*next;
 };
 
-t_room		*parse_farm(char *line);
+struct s_ants
+{
+	int		id;	
+	int		pos;
+	t_ants	*next;
+};
+
+t_room		*parse_farm(char *line, int *ants);
 int			parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
 void		print_struct_members(t_room *item, int len);
 void		print_list(t_room *head, int len);
+void		print_ants_list(t_ants *head);
 t_room		*ft_lstaddendroom(t_room *head);
 t_sosed		*ft_lstaddendsosed(t_sosed *head);
 int			list_length(t_room *item);

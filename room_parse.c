@@ -43,7 +43,7 @@ t_room	*identify_room(t_room *head, int *flag, int type, char *line)
 	return (0);
 }
 
-t_room	*parse_farm(char *line)
+t_room	*parse_farm(char *line, int *ants)
 {
 	int		id;
 	int		flag;
@@ -52,6 +52,7 @@ t_room	*parse_farm(char *line)
 	id = 0;
 	flag = 1;
 	get_next_line(0, &line);
+	*ants = ft_atoi(line);
 	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
 	{
 		if (ft_strstr(line, "##start"))

@@ -31,6 +31,19 @@ void		print_list(t_room *head, int len)
 	}
 }
 
+void		print_ants_list(t_ants *head)
+{
+	t_ants *current;
+
+	current = head;
+	while (current != NULL)
+	{
+		ft_printf("id: %d\n", current->id);
+		ft_printf("pos: %d\n", current->pos);		
+		current = current->next;
+	}
+}
+
 t_room		*ft_lstaddendroom(t_room *head)
 {
 	t_room	*current;
@@ -90,4 +103,29 @@ int			list_length(t_room *item)
 		cur = cur->next;
 	}
 	return (size);
+}
+
+void	iterate_list(t_room *start, int len)
+{
+	int		i;
+	int		j;
+	int		*way;
+	t_room	*cur;
+
+	i = 0;
+	cur = start;
+	while (cur != NULL)
+	{
+		j = 0;
+		way = malloc(sizeof(int) * len);
+		while (j < len)
+		{
+			way[j] = -1;
+			j++;
+		}
+		cur->way = way;
+		cur->id = i;
+		cur = cur->next;
+		i++;
+	}
 }
