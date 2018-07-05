@@ -82,7 +82,7 @@ t_ants	*ft_lstaddendant(t_ants *head)
 	while (current->next != NULL)
 		current = current->next;
 	current->next = malloc(sizeof(t_ants));
-	current->next->pos = 0;
+	current->next->pos = -1;
 	current->next->next = NULL;
 	return (current->next);
 }
@@ -96,7 +96,7 @@ t_ants *create_ants_list(int amount)
 	i = 1;
 	start = malloc(sizeof(t_ants *));
 	start->id = 0;
-	start->pos = 0;
+	start->pos = -1;
 	start->next = NULL;
 	while (i < amount)
 	{

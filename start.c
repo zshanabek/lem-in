@@ -28,34 +28,34 @@ int		is_everybody_outside(t_ants *start, int end)
 	return (1);
 }
 
-void	increment(t_room *head)
+void	move_ants(t_ants *head, int *path, int len)
 {
-	t_cur *cur;
+	static int i = 0;
+	t_ants	*cur;
+	int		s;
 
-	if (cur != NULL)
-	{
-		cur = cur->next;
-	}
-}
-
-void	move_ants(t_ants *head, int *path)
-{
-	t_ants *cur;
-
+	s = 0;
+	i++;
 	cur = head;
-	while (cur != NULL)
+	while (cur != NULL && s < i)
 	{
-		
+		if (cur->pos != len - 1)
+			cur->pos++;
 		cur = cur->next;
+		s++;
 	}
 }
 
-void	exit_ants(t_ants *start, int *path, int endid)
+void	exit_ants(t_ants *start, int *path, int len)
 {
 	t_ants *cur;
 
-	while(!is_everybody_outside(start, endid))
-		move_ants(start, path);
+	while (!is_everybody_outside(start, len - 1))
+	{
+		move_ants(start, path, len);
+		print_ants_list(start);
+		ft_printf("========\n");		
+	}		
 }
 
 int		main(void)
@@ -75,6 +75,5 @@ int		main(void)
 	path = end->way;
 	ft_print1dintarr(path, len);
 	ants = create_ants_list(amount);
-	exit_ants(ants, path, end->id);
-	is_everybody_outside(ants, end->id);
+	exit_ants(ants, path, len);
 }
