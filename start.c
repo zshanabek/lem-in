@@ -39,23 +39,36 @@ void	move_ants(t_ants *head, int *path, int len)
 	cur = head;
 	while (cur != NULL && s < i)
 	{
-		if (cur->pos != len - 1)
+		if (cur->pos != len)
 			cur->pos++;
 		cur = cur->next;
 		s++;
 	}
 }
 
-void	exit_ants(t_ants *start, int *path, int len)
+void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
+{
+	t_ants *current;
+
+	current = head;
+	while (current != NULL)
+	{
+		if (current->pos != -1 && current->pos != len)
+			ft_printf("L%d-%s ", current->id + 1, find_by_id(rooms, path[current->pos])->name);
+		current = current->next;
+	}
+}
+
+void	exit_ants(t_ants *start, t_room *rooms,int *path, int len)
 {
 	t_ants *cur;
 
-	while (!is_everybody_outside(start, len - 1))
+	while (!is_everybody_outside(start, len))
 	{
 		move_ants(start, path, len);
-		print_ants_list(start);
-		ft_printf("========\n");		
-	}		
+		print_ants_step(start, rooms, path, len);
+		ft_putchar('\n');		
+	}
 }
 
 int		main(void)
@@ -73,7 +86,6 @@ int		main(void)
 	algorithm(rooms, len);
 	end = get_end(rooms);
 	path = end->way;
-	ft_print1dintarr(path, len);
 	ants = create_ants_list(amount);
-	exit_ants(ants, path, len);
+	exit_ants(ants, rooms, path, len);
 }

@@ -32,7 +32,7 @@ struct s_ants
 	int		pos;
 	t_ants	*next;
 };
-
+t_room		*find_by_id(t_room *start, int id);
 t_room		*parse_farm(int *ants);
 int			parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
