@@ -49,45 +49,39 @@ t_room	*parse_farm(int *ants)
 	int		flag;
 	char	*line;
 	t_room	*head;
+	int		type;
 
 	line = NULL;
 	id = 0;
+	type = 0;	
 	flag = 1;
 	get_next_line(0, &line);
 	ft_printf("%s\n", line);
 	*ants = ft_atoi(line);
 	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
 	{
-		if (ft_strstr(line, "##start"))
+		if (line[0] == '#' && line[1] != '#')
 		{
 			ft_printf("%s\n", line);			
 			get_next_line(0, &line);
-			if (flag == 1)
-				head = identify_room(head, &flag, 1, line);
-			else
-				identify_room(head, &flag, 1, line);
 		}
-		else if (ft_strstr(line, "##end"))
+		else if (!ft_strcmp(line, "##start") || !ft_strcmp(line, "##end"))
 		{
 			ft_printf("%s\n", line);			
+			type = (!ft_strcmp(line, "##start")) ? 1 : 2;
 			get_next_line(0, &line);
-			if (flag == 1)
-				head = identify_room(head, &flag, 2, line);
-			else
-				identify_room(head, &flag, 2, line);
+			(flag == 1) ? head = identify_room(head, &flag, type, line) :
+			identify_room(head, &flag, type, line);
 		}
 		else
-		{
-			if (flag == 1)
-				head = identify_room(head, &flag, 0, line);
-			else
-				identify_room(head, &flag, 0, line);
-		}
+			(flag == 1) ? head = identify_room(head, &flag, type, line) :
+			identify_room(head, &flag, type, line);
+		type = 0;
 		ft_printf("%s\n", line);						
 	}
 	if (parse_tubes(head, line) == 0)
 	{
-		ft_printf("Error");
+		ft_printf("Error\n");
 		exit(1);
 	}
 	return (head);
