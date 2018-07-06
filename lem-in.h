@@ -46,4 +46,5 @@ int			list_length(t_room *item);
 void		fill_matrix(t_room *start, int **matrix, int len);
 void		algorithm(t_room *start, int len);
 void		iterate_list(t_room *start, int len);
+void		exit_ants(t_ants *start, t_room *rooms,int *path, int len);
 #endif
