@@ -93,12 +93,12 @@ t_ants *create_ants_list(int amount)
 	t_ants	*start;
 	t_ants	*ant;
 
-	i = 1;
+	i = 2;
 	start = malloc(sizeof(t_ants *));
-	start->id = 0;
+	start->id = 1;
 	start->pos = -1;
 	start->next = NULL;
-	while (i < amount)
+	while (i < amount + 1)
 	{
 		ant = ft_lstaddendant(start);
 		ant->id = i;

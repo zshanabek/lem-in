@@ -19,9 +19,9 @@ void	move_ants(t_ants *head, int *path, int len)
 	int			s;
 	t_ants		*cur;
 	static int	i;
-
-	s = 0;
+	
 	i++;
+	s = 0;
 	cur = head;
 	while (cur != NULL && s < i)
 	{
@@ -34,18 +34,25 @@ void	move_ants(t_ants *head, int *path, int len)
 
 void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 {
-	t_ants *current;
+	int		ok;	
+	t_ants	*current;
 
+	ok = 0;
 	current = head;
 	while (current != NULL)
 	{
-		if (current->pos != -1 && current->pos != len)
-			ft_printf("L%d-%s ", current->id + 1, find_by_id(rooms, path[current->pos])->name);
+		if (current->pos != -1 && current->pos != 0 && current->pos != len)
+		{
+			ft_printf("L%d-%s ", current->id, find_by_id(rooms, path[current->pos])->name);
+			ok = 1;
+		}
 		current = current->next;
 	}
+	if (ok)
+		ft_putchar('\n');		
 }
 
-void	exit_ants(t_ants *start, t_room *rooms,int *path, int len)
+void	exit_ants(t_ants *start, t_room *rooms, int *path, int len)
 {
 	t_ants *cur;
 
@@ -53,6 +60,5 @@ void	exit_ants(t_ants *start, t_room *rooms,int *path, int len)
 	{
 		move_ants(start, path, len);
 		print_ants_step(start, rooms, path, len);
-		ft_putchar('\n');		
 	}
 }

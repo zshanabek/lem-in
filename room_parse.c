@@ -54,11 +54,13 @@ t_room	*parse_farm(int *ants)
 	id = 0;
 	flag = 1;
 	get_next_line(0, &line);
+	ft_printf("%s\n", line);
 	*ants = ft_atoi(line);
 	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
 	{
 		if (ft_strstr(line, "##start"))
 		{
+			ft_printf("%s\n", line);			
 			get_next_line(0, &line);
 			if (flag == 1)
 				head = identify_room(head, &flag, 1, line);
@@ -67,6 +69,7 @@ t_room	*parse_farm(int *ants)
 		}
 		else if (ft_strstr(line, "##end"))
 		{
+			ft_printf("%s\n", line);			
 			get_next_line(0, &line);
 			if (flag == 1)
 				head = identify_room(head, &flag, 2, line);
@@ -80,6 +83,7 @@ t_room	*parse_farm(int *ants)
 			else
 				identify_room(head, &flag, 0, line);
 		}
+		ft_printf("%s\n", line);						
 	}
 	if (parse_tubes(head, line) == 0)
 	{
