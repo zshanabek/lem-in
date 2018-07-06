@@ -45,7 +45,8 @@ int		bfs(t_room *start, int *queue, int num, int len)
 	scur = cur->sosed;
 	while (scur != NULL)
 	{
-		if (!is_in_array(scur->room->id, queue, len) && scur->room->is_visited != 1)
+		if (!is_in_array(scur->room->id, queue, len) &&
+		scur->room->is_visited != 1)
 		{
 			enqueue(scur->room->id, queue, len);
 			ft_intcpy(scur->room->way, cur->way, len);
@@ -53,7 +54,7 @@ int		bfs(t_room *start, int *queue, int num, int len)
 		}
 		if (scur->room->type == 2)
 		{
-			enqueue(scur->room->id, scur->room->way, len);			
+			enqueue(scur->room->id, scur->room->way, len);
 			return (0);
 		}
 		scur = scur->next;

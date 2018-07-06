@@ -1,4 +1,30 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/06 17:26:53 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/07/06 18:03:51 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem-in.h"
+
+t_room	*get_end(t_room *start)
+{
+	t_room *cur;
+
+	cur = start;
+	while (cur != NULL)
+	{
+		if (cur->type == 2)
+			return (cur);
+		cur = cur->next;
+	}
+	return (NULL);
+}
 
 int		is_everybody_outside(t_ants *start, int end)
 {
@@ -41,9 +67,11 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 	current = head;
 	while (current != NULL)
 	{
-		if (current->pos != 0 && current->pos != len && path[current->pos] != -1)
+		if (current->pos != 0 && current->pos != len && current->pos != -1)
 		{
-			ft_printf("L%d-%s ", current->id, find_by_id(rooms, path[current->pos])->name);
+			if (path[current->pos] != -1)
+				ft_printf("L%d-%s ", current->id, 
+				find_by_id(rooms, path[current->pos])->name);
 			ok = 1;
 		}
 		current = current->next;
@@ -52,10 +80,14 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 		ft_putchar('\n');		
 }
 
-void	exit_ants(t_ants *start, t_room *rooms, int *path, int len)
+void	exit_ants(t_ants *start, t_room *rooms, int len)
 {
 	t_ants *cur;
+	t_room	*end;
+	int		*path;
 
+	end = get_end(rooms);
+	path = end->way;	
 	while (!is_everybody_outside(start, len))
 	{
 		move_ants(start, path, len);

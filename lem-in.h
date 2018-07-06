@@ -32,20 +32,21 @@ struct s_ants
 	int		pos;
 	t_ants	*next;
 };
+
 t_room		*find_by_id(t_room *start, int id);
 t_room		*parse_farm(int *ants);
 int			parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
-void		print_struct_members(t_room *item, int len);
+void		print_struct_members(t_room *item);
 void		print_list(t_room *head, int len);
 void		print_ants_list(t_ants *head);
-t_room		*ft_lstaddendroom(t_room *head);
-t_sosed		*ft_lstaddendsosed(t_sosed *head);
+void		ft_lstaddendroom(t_room **head, t_room *item);
+void		ft_lstaddendsosed(t_sosed **head, t_sosed *item);
 t_ants 		*create_ants_list(int amount);
 int			list_length(t_room *item);
 void		fill_matrix(t_room *start, int **matrix, int len);
 void		algorithm(t_room *start, int len);
 void		iterate_list(t_room *start, int len);
-void		exit_ants(t_ants *start, t_room *rooms,int *path, int len);
+void		exit_ants(t_ants *start, t_room *rooms, int len);
 void		print_path(t_room *head, int *path, int len);
 #endif
