@@ -45,6 +45,21 @@ void		print_ants_list(t_ants *head)
 	}
 }
 
+void	print_path(t_room *head, int *path, int len)
+{
+	int i;
+
+	i = 0;
+	while (i < len)
+	{
+		if (path[i] != -1)
+			ft_printf("%s ", find_by_id(head, path[i])->name);
+		else
+			ft_printf("-1 ");
+		i++;
+	}
+	ft_putchar('\n');
+}
 t_room		*ft_lstaddendroom(t_room *head)
 {
 	t_room	*current;

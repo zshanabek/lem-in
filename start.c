@@ -31,5 +31,6 @@ int		main(void)
 	path = end->way;
 	ants = create_ants_list(amount);
 	ft_putchar('\n');
+	print_path(rooms, path, len);
 	exit_ants(ants, rooms, path, len);
 }

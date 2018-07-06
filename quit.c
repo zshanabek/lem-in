@@ -41,7 +41,7 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 	current = head;
 	while (current != NULL)
 	{
-		if (current->pos != -1 && current->pos != 0 && current->pos != len)
+		if (current->pos != 0 && current->pos != len && path[current->pos] != -1)
 		{
 			ft_printf("L%d-%s ", current->id, find_by_id(rooms, path[current->pos])->name);
 			ok = 1;
