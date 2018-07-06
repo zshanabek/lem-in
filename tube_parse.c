@@ -19,8 +19,8 @@ int		create_tube(t_room *head, char *line)
 {
 	int			i;
 	t_room		*room;
-	t_sosed		*sosed;
 	t_room 		*room2;
+	t_sosed		*sosed;
 
 	i = 0;
 	while (line[i] && line[i] != '-')
