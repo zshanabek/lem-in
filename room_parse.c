@@ -45,6 +45,20 @@ int		validate(t_room *head)
 		return (0);
 }
 
+int		is_contains_digit(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i])
+	{
+		if (!ft_isdigit(line[i]))
+			return (0);
+		i++;
+	}
+	return (1);
+}
+
 t_room	*parse_farm(int *ants)
 {
 	int		id;
@@ -55,18 +69,17 @@ t_room	*parse_farm(int *ants)
 	id = 0;
 	type = 0;
 	head = NULL;
-	line = NULL;	
+	line = NULL;
 	get_next_line(0, &line), ft_printf("%s\n", line);
 	*ants = ft_atoi(line);
-	while (get_next_line(0, &line) && !ft_strstr(line, "-"))
+	while (get_next_line(0, &line) && two_spaces(line))
 	{
 		type = (line[0] == '#' && !ft_strcmp(line, "##start")) ?  1 : type;
 		type = (line[0] == '#' && !ft_strcmp(line, "##end")) ?  2 : type;
-		ft_printf("%s\n", line);		
+		ft_printf("%s\n", line);
 		if (line[0] == '#')
 			continue;
-		if (two_spaces(line))
-			ft_lstaddendroom(&head, insert_room(type, line));
+		ft_lstaddendroom(&head, insert_room(type, line));
 		type = 0;
 	}
 	if (!validate(head) || !parse_tubes(head, line))

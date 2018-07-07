@@ -139,6 +139,10 @@ int			two_spaces(char *line)
 	}
 	if (count == 2)
 		return (1);
+	else if (ft_strcmp(line, "##start"))
+		return (1);
+	else if (ft_strcmp(line, "##end"))
+		return (1);
 	return (0);
 }
 
