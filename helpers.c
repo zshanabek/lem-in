@@ -20,7 +20,7 @@ void		print_struct_members(t_room *item)
 	ft_printf("==========================\n");
 }
 
-void		print_list(t_room *head, int len)
+void		print_list(t_room *head)
 {
 	t_room *current;
 

@@ -24,6 +24,27 @@ t_room		*insert_room(int type, char *line)
 	return (room);
 }
 
+int		validate(t_room *head)
+{
+	t_room *cur;
+	int i;
+
+	i = 0;
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->type == 1)
+			i++;
+		if (cur->type == 2)
+			i++;
+		cur = cur->next;
+	}
+	if (i == 2)
+		return (1);
+	else
+		return (0);
+}
+
 t_room	*parse_farm(int *ants)
 {
 	int		id;
@@ -44,10 +65,11 @@ t_room	*parse_farm(int *ants)
 		ft_printf("%s\n", line);		
 		if (line[0] == '#')
 			continue;
-		ft_lstaddendroom(&head, insert_room(type, line));
+		if (two_spaces(line))
+			ft_lstaddendroom(&head, insert_room(type, line));
 		type = 0;
 	}
-	if (parse_tubes(head, line) == 0)
+	if (!validate(head) || !parse_tubes(head, line))
 	{
 		ft_printf("Error\n");
 		exit(1);
