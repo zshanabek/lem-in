@@ -45,7 +45,7 @@ int		validate(t_room *head)
 		return (0);
 }
 
-int		is_contains_digit(char *line)
+int		are_all_digits(char *line)
 {
 	int i;
 
@@ -72,7 +72,7 @@ t_room	*parse_farm(int *ants)
 	line = NULL;
 	get_next_line(0, &line), ft_printf("%s\n", line);
 	*ants = ft_atoi(line);
-	while (get_next_line(0, &line) && two_spaces(line))
+	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
 		type = (line[0] == '#' && !ft_strcmp(line, "##start")) ?  1 : type;
 		type = (line[0] == '#' && !ft_strcmp(line, "##end")) ?  2 : type;
