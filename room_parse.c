@@ -4,8 +4,8 @@ t_room		*insert_room(int type, char *line)
 {
 	int i;
 	t_room *room;
+	
 	i = 0;
-
 	room = malloc(sizeof(t_room));
 	room->is_visited = 0;
 	room->is_closed = 0;
@@ -72,15 +72,23 @@ t_room	*parse_farm(int *ants)
 	line = NULL;
 	get_next_line(0, &line), ft_printf("%s\n", line);
 	*ants = ft_atoi(line);
+	ft_strdel(&line);
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
-		type = (line[0] == '#' && !ft_strcmp(line, "##start")) ?  1 : type;
-		type = (line[0] == '#' && !ft_strcmp(line, "##end")) ?  2 : type;
+		if (line[0] == '#' && !ft_strcmp(line, "##start"))
+			type = 1;
+		else if (line[0] == '#' && !ft_strcmp(line, "##end"))
+			type = 2;
 		ft_printf("%s\n", line);
 		if (line[0] == '#')
+		{
+			if (type == 1 || type == 2)
+				ft_strdel(&line);
 			continue;
+		}
 		ft_lstaddendroom(&head, insert_room(type, line));
 		type = 0;
+		ft_strdel(&line);
 	}
 	if (!validate(head) || !parse_tubes(head, line))
 	{

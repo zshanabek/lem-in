@@ -20,18 +20,24 @@ int		create_tube(t_room *head, char *line)
 	t_room		*room;
 	t_room 		*room2;
 	t_sosed		*sosed;
+	char 		*temp;
 
 	i = 0;
 	while (line[i] && line[i] != '-')
 		i++;
-	if ((room = search(head, ft_strsub(line, 0, i))) == 0)
+	if ((room = search(head, (temp = ft_strsub(line, 0, i)))) == 0)
+	{
+		free(temp);
 		return (0);
-	if ((room2 = search(head, ft_strsub(line, ++i, ft_strlen(line)))) != 0)
+	}
+	free(temp);	
+	if ((room2 = search(head, (temp = ft_strsub(line, ++i, ft_strlen(line))))) != 0)
 	{
 		sosed = malloc(sizeof(t_sosed));
 		sosed->next = NULL;
 		sosed->room = room2;
 		ft_lstaddendsosed(&room->sosed, sosed);
+		free(temp);
 	}
 	else
 		return (0);
@@ -42,8 +48,16 @@ int		parse_tubes(t_room *head, char *line)
 {
 	if (!create_tube(head, line))
 		return (0);
+	ft_strdel(&line);
 	while (get_next_line(0, &line))
+	{
 		if (!create_tube(head, line))
+		{
+			ft_strdel(&line);		
 			return (0);
+		}
+		ft_strdel(&line);
+	}
+	ft_strdel(&line);
 	return (1);
 }
