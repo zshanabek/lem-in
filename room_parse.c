@@ -45,7 +45,7 @@ int		validate(t_room *head)
 		return (0);
 }
 
-int		are_all_digits(char *line)
+int		is_digital(char *line)
 {
 	int i;
 
@@ -66,23 +66,20 @@ int		is_comment(char *line)
 	return (0);
 }
 
+int		is_line_valid(char *line)
+{
+	if (ft_isempty(line))
+		exit(1);
+	if (!is_comment(line) && !is_digital(line))
+		exit(1);
+	return (1);
+}
+
 int		get_ants_amount(char *line, int *ants)
 {
 	get_next_line(0, &line);
-	if (!is_comment(line))
-	{
-		if (ft_isempty(line))
-			exit(1);
-		else if (are_all_digits(line))
-		{
-			ft_printf("%s\n", line);			
-			*ants = ft_atoi(line);
-			return (*ants);
-		}
-		else
-			exit(1);
-	}
-	ft_printf("%s\n", line);
+	if (is_line_valid(line))
+		*ants = ft_atoi(line);
 	return (*ants);	
 }
 
