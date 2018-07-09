@@ -2,26 +2,28 @@
 
 void	ft_roomlstdel(t_room **head)
 {
-	t_room *temp;
-	t_sosed *current;
-	t_sosed *stemp;	
+	t_room		*cur;	
+	t_room		*temp;
+	t_sosed		*scur;
+	t_sosed		*stemp;	
 
 	if (!head)
 		return ;
-	while (*head != NULL)
+	cur = *head;
+	while (cur != NULL)
 	{
-		temp = (*head)->next;
-		current = (*head)->sosed;
-		ft_strdel(&((*head)->name));
-		free((*head)->way);		
-		while (current != NULL)
+		temp = cur->next;
+		free(cur->way);
+		free(cur->name);
+		scur = cur->sosed;
+		while (scur != NULL)
 		{
-			stemp = current->next;
-			free(current);
-			current = stemp;
+			stemp = scur->next;
+			free(scur);
+			scur = stemp;
 		}
-		ft_memdel((void **)head);
-		*head = temp;
+		free(cur);
+		cur = temp;
 	}
 	*head = NULL;
 }
