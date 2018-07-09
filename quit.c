@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/06 17:26:53 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/06 18:03:51 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/09 23:52:39 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 		if (current->pos != 0 && current->pos != len && current->pos != -1)
 		{
 			if (path[current->pos] != -1)
-				ft_printf("L%d-%s ", current->id, 
+				ft_printf("{cyan}L%d-{eoc}{yellow}%s{eoc} ", current->id, 
 				find_by_id(rooms, path[current->pos])->name);
 			ok = 1;
 		}

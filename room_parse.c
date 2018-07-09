@@ -53,10 +53,37 @@ int		are_all_digits(char *line)
 	while (line[i])
 	{
 		if (!ft_isdigit(line[i]))
-			return (0);
+			return (0);			
 		i++;
 	}
 	return (1);
+}
+
+int		is_comment(char *line)
+{
+	if (line[0] == '#' && line[1] != '#')
+		return (1);
+	return (0);
+}
+
+int		get_ants_amount(char *line, int *ants)
+{
+	get_next_line(0, &line);
+	if (!is_comment(line))
+	{
+		if (ft_isempty(line))
+			exit(1);
+		else if (are_all_digits(line))
+		{
+			ft_printf("%s\n", line);			
+			*ants = ft_atoi(line);
+			return (*ants);
+		}
+		else
+			exit(1);
+	}
+	ft_printf("%s\n", line);
+	return (*ants);	
 }
 
 t_room	*parse_farm(int *ants)
@@ -70,9 +97,8 @@ t_room	*parse_farm(int *ants)
 	type = 0;
 	head = NULL;
 	line = NULL;
-	get_next_line(0, &line), ft_printf("%s\n", line);
-	*ants = ft_atoi(line);
-	ft_strdel(&line);
+	get_ants_amount(line, ants);
+	ft_printf("{yellow}ants: %d\n{eoc}", *ants);
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
 		if (line[0] == '#' && !ft_strcmp(line, "##start"))
