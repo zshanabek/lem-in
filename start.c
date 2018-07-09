@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-void	ft_roomlstdel(t_room **head)
+static void		ft_roomlstdel(t_room **head)
 {
 	t_room		*cur;	
 	t_room		*temp;
@@ -10,13 +10,13 @@ void	ft_roomlstdel(t_room **head)
 	if (!head)
 		return ;
 	cur = *head;
-	while (cur != NULL)
+	while (cur)
 	{
 		temp = cur->next;
 		free(cur->way);
 		free(cur->name);
 		scur = cur->sosed;
-		while (scur != NULL)
+		while (scur)
 		{
 			stemp = scur->next;
 			free(scur);
