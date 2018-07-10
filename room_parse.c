@@ -1,11 +1,33 @@
 #include "lem-in.h"
 
+int check_coordinates(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] != ' ')
+		i++;
+	i++;
+	while (line[i] && ft_isdigit(line[i]))
+		i++;
+	if (line[i] != ' ')
+		return (0);
+	i++;
+	while (line[i] && ft_isdigit(line[i]))
+		i++;
+	if (line[i] != 0)
+		return (0);
+	return (1);
+}
+
 t_room		*insert_room(int type, char *line)
 {
 	int i;
 	t_room *room;
 	
 	i = 0;
+	if (!check_coordinates(line))
+		exit(1);
 	room = malloc(sizeof(t_room));
 	room->is_visited = 0;
 	room->is_closed = 0;
@@ -97,7 +119,6 @@ t_room	*parse_farm(int *ants)
 	head = NULL;
 	line = NULL;
 	get_ants_amount(line, ants);
-	ft_printf("{yellow}ants: %d\n{eoc}", *ants);
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
 		if (!two_spaces(line) && !is_comment(line))
