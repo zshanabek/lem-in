@@ -137,11 +137,7 @@ int			two_spaces(char *line)
 			count++;
 		i++;
 	}
-	if (count == 2)
-		return (1);
-	else if (ft_strcmp(line, "##start"))
-		return (1);
-	else if (ft_strcmp(line, "##end"))
+	if (count == 2 || ft_strequ(line, "##start") || ft_strequ(line, "##end"))
 		return (1);
 	return (0);
 }

@@ -61,16 +61,14 @@ int		is_digital(char *line)
 
 int		is_comment(char *line)
 {
-	if (line[0] == '#' && line[1] != '#')
+	if (line[0] == '#')
 		return (1);
 	return (0);
 }
 
 int		is_line_valid(char *line)
 {
-	if (ft_isempty(line))
-		exit(1);
-	if (!is_comment(line) && !is_digital(line))
+	if (ft_isempty(line) || (!is_comment(line) && !is_digital(line)))
 		exit(1);
 	return (1);
 }
@@ -97,6 +95,8 @@ t_room	*parse_farm(int *ants)
 	ft_printf("{yellow}ants: %d\n{eoc}", *ants);
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
+		if (!two_spaces(line) && !is_comment(line))
+			exit(1);
 		if (line[0] == '#' && !ft_strcmp(line, "##start"))
 			type = 1;
 		else if (line[0] == '#' && !ft_strcmp(line, "##end"))
