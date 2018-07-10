@@ -75,9 +75,14 @@ int		is_line_valid(char *line)
 
 int		get_ants_amount(char *line, int *ants)
 {
+	intmax_t temp;
+
 	get_next_line(0, &line);
 	if (is_line_valid(line))
-		*ants = ft_atoi(line);
+		temp = ft_atoimax(line);
+	if (temp >= 2147483647)
+		exit(1);
+	*ants = ft_atoi(line);
 	ft_printf("%s\n", line);
 	return (*ants);	
 }
