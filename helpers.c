@@ -20,6 +20,12 @@ void		print_struct_members(t_room *item)
 	ft_printf("\n===============\n");
 }
 
+void	show_error(void)
+{
+	ft_printf("ERROR\n");
+	exit(1);
+}
+
 void		print_list(t_room *head)
 {
 	t_room *current;

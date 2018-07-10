@@ -27,7 +27,7 @@ t_room		*insert_room(int type, char *line)
 	
 	i = 0;
 	if (!check_coordinates(line))
-		exit(1);
+		show_error();
 	room = malloc(sizeof(t_room));
 	room->is_visited = 0;
 	room->is_closed = 0;
@@ -91,7 +91,7 @@ int		is_comment(char *line)
 int		is_line_valid(char *line)
 {
 	if (ft_isempty(line) || (!is_comment(line) && !is_digital(line)))
-		exit(1);
+		show_error();
 	return (1);
 }
 
@@ -103,7 +103,7 @@ int		get_ants_amount(char *line, int *ants)
 	if (is_line_valid(line))
 		temp = ft_atoimax(line);
 	if (temp >= 2147483647)
-		exit(1);
+		show_error();
 	*ants = ft_atoi(line);
 	ft_printf("%s\n", line);
 	return (*ants);	
@@ -122,7 +122,7 @@ t_room	*parse_farm(int *ants)
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
 		if (!two_spaces(line) && !is_comment(line))
-			exit(1);
+			show_error();
 		if (line[0] == '#' && !ft_strcmp(line, "##start"))
 			type = 1;
 		else if (line[0] == '#' && !ft_strcmp(line, "##end"))
@@ -139,9 +139,6 @@ t_room	*parse_farm(int *ants)
 		ft_strdel(&line);
 	}
 	if (!validate(head) || !parse_tubes(head, line))
-	{
-		ft_printf("Error\n");
-		exit(1);
-	}
+		show_error();
 	return (head);
 }

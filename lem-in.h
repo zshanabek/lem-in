@@ -50,4 +50,6 @@ void		iterate_list(t_room *start, int len);
 void		exit_ants(t_ants *start, t_room *rooms, int len);
 void		print_path(t_room *head, int *path, int len);
 int			validate(t_room *head);
+void		show_error(void);
+int			is_comment(char *line);
 #endif
