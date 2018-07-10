@@ -12,11 +12,11 @@
 
 #include "lem-in.h"
 
-t_room	*get_end(t_room *start)
+t_room	*get_end(t_room *head)
 {
 	t_room *cur;
 
-	cur = start;
+	cur = head;
 	while (cur != NULL)
 	{
 		if (cur->type == 2)
@@ -40,7 +40,7 @@ int		is_everybody_outside(t_ants *start, int end)
 	return (1);
 }
 
-void	move_ants(t_ants *head, int *path, int len)
+void	move_ants(t_ants *head, int len)
 {
 	int			s;
 	t_ants		*cur;
@@ -82,15 +82,15 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 
 void	exit_ants(t_ants *start, t_room *rooms, int len)
 {
-	t_ants *cur;
 	t_room	*end;
 	int		*path;
 
 	end = get_end(rooms);
-	path = end->way;	
+	path = end->way;
+	print_path(rooms, path, len);
 	while (!is_everybody_outside(start, len))
 	{
-		move_ants(start, path, len);
+		move_ants(start, len);
 		print_ants_step(start, rooms, path, len);
 	}
 }

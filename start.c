@@ -38,6 +38,7 @@ int		main(void)
 	rooms = parse_farm(&amount);
 	len = list_length(rooms);	
 	iterate_list(rooms, len);
+	// print_list(rooms);
 	algorithm(rooms, len);
 	ants = create_ants_list(amount);
 	ft_putchar('\n');

@@ -48,6 +48,7 @@ int		parse_tubes(t_room *head, char *line)
 {
 	if (!create_tube(head, line))
 		return (0);
+	ft_printf("%s\n", line);	
 	ft_strdel(&line);
 	while (get_next_line(0, &line))
 	{
@@ -56,6 +57,7 @@ int		parse_tubes(t_room *head, char *line)
 			ft_strdel(&line);		
 			return (0);
 		}
+		ft_printf("%s\n", line);
 		ft_strdel(&line);
 	}
 	ft_strdel(&line);

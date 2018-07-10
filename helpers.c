@@ -17,7 +17,7 @@ void		print_struct_members(t_room *item)
 		ft_printf("%s ", current->room->name);
 		current = current->next;
 	}
-	ft_printf("==========================\n");
+	ft_printf("\n===============\n");
 }
 
 void		print_list(t_room *head)

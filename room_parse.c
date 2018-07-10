@@ -80,17 +80,16 @@ int		get_ants_amount(char *line, int *ants)
 	get_next_line(0, &line);
 	if (is_line_valid(line))
 		*ants = ft_atoi(line);
+	ft_printf("%s\n", line);
 	return (*ants);	
 }
 
 t_room	*parse_farm(int *ants)
 {
-	int		id;
-	int		type;	
+	int		type;
 	char	*line;
 	t_room	*head;
 
-	id = 0;
 	type = 0;
 	head = NULL;
 	line = NULL;

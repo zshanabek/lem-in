@@ -11,6 +11,20 @@ int		is_in_array(int num, int *arr, int len)
 	return (0);
 }
 
+t_room	*get_start(t_room *head)
+{
+	t_room *cur;
+
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->type == 1)
+			return (cur);
+		cur = cur->next;
+	}
+	return (NULL);
+}
+
 void	enqueue(int num, int *arr, int len)
 {
 	int i;
@@ -74,7 +88,7 @@ void	algorithm(t_room *start, int len)
 		i++;
 	}
 	i = 0;
-	queue[i] = 0;
+	queue[i] = get_start(start)->id;
 	while (i < len && bfs(start, queue, queue[i], len))
 		i++;
 }
