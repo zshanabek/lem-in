@@ -41,7 +41,7 @@ int			two_spaces(char *line)
 			count++;
 		i++;
 	}
-	if (count == 2 || ft_strequ(line, "##start") || ft_strequ(line, "##end"))
+	if (count == 2)
 		return (1);
 	return (0);
 }

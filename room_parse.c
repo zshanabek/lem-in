@@ -94,24 +94,18 @@ t_room		*parse_farm(int *ants)
 	get_ants_amount(line, ants);
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
+		type = (ft_strequ(line, "##start")) ? 1 : type;
+		type = (ft_strequ(line, "##end")) ? 2 : type;
+		if (two_spaces(line))
+		{
+			ft_lstaddendroom(&head, insert_room(type, line));
+			type = 0;
+		}
 		if (!two_spaces(line) && !is_comment(line))
 			show_error();
-		if (line[0] == '#' && !ft_strcmp(line, "##start"))
-			type = 1;
-		else if (line[0] == '#' && !ft_strcmp(line, "##end"))
-			type = 2;
 		ft_printf("%s\n", line);
-		if (line[0] == '#')
-		{
-			if (type == 1 || type == 2)
-				free(line);
-			continue;
-		}
-		ft_lstaddendroom(&head, insert_room(type, line));
-		type = 0;
 		free(line);
 	}
 	parse_tubes(head, line);
-	free(line);
 	return (head);
 }

@@ -57,6 +57,7 @@ void	parse_tubes(t_room *head, char *line)
 {
 	create_tube(head, line);
 	ft_printf("%s\n", line);
+	free(line);	
 	while (get_next_line(0, &line))
 	{
 		if (is_comment(line))
