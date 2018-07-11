@@ -96,6 +96,8 @@ int		main(void)
 	t_room	*rooms;
 
 	rooms = parse_farm(&amount);
+	if (!validate(rooms))
+		show_error();
 	len = list_length(rooms);	
 	iterate_list(rooms, len);
 	// print_list(rooms);

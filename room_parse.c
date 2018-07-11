@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-int check_coordinates(char *line)
+int			check_coordinates(char *line)
 {
 	int i;
 
@@ -22,9 +22,9 @@ int check_coordinates(char *line)
 
 t_room		*insert_room(int type, char *line)
 {
-	int i;
-	t_room *room;
-	
+	int		i;
+	t_room	*room;
+
 	i = 0;
 	if (!check_coordinates(line))
 		show_error();
@@ -46,10 +46,10 @@ t_room		*insert_room(int type, char *line)
 	return (room);
 }
 
-int		validate(t_room *head)
+int			validate(t_room *head)
 {
-	t_room *cur;
-	int i;
+	int		i;
+	t_room	*cur;
 
 	i = 0;
 	cur = head;
@@ -67,7 +67,7 @@ int		validate(t_room *head)
 		return (0);
 }
 
-int		get_ants_amount(char *line, int *ants)
+int			get_ants_amount(char *line, int *ants)
 {
 	intmax_t temp;
 
@@ -79,10 +79,10 @@ int		get_ants_amount(char *line, int *ants)
 	*ants = ft_atoi(line);
 	ft_printf("%s\n", line);
 	free(line);
-	return (*ants);	
+	return (*ants);
 }
 
-t_room	*parse_farm(int *ants)
+t_room		*parse_farm(int *ants)
 {
 	int		type;
 	char	*line;
@@ -111,8 +111,6 @@ t_room	*parse_farm(int *ants)
 		type = 0;
 		free(line);
 	}
-	if (!validate(head))
-		show_error();
 	parse_tubes(head, line);
 	free(line);
 	return (head);
