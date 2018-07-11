@@ -20,7 +20,21 @@ int			check_coordinates(char *line)
 	return (1);
 }
 
-t_room		*insert_room(int type, char *line)
+int			unique_coordinates(t_room *head, int x, int y)
+{
+	t_room *cur;
+
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->x == x && cur->y == y)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
+t_room		*insert_room(t_room *head, int type, char *line)
 {
 	int		i;
 	t_room	*room;
@@ -43,6 +57,8 @@ t_room		*insert_room(int type, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	room->y = ft_atoi(&line[i]);
+	if (!unique_coordinates(head, room->x, room->y))
+		show_error();
 	return (room);
 }
 
@@ -98,7 +114,7 @@ t_room		*parse_farm(int *ants)
 		type = (ft_strequ(line, "##end")) ? 2 : type;
 		if (two_spaces(line))
 		{
-			ft_lstaddendroom(&head, insert_room(type, line));
+			ft_lstaddendroom(&head, insert_room(head, type, line));
 			type = 0;
 		}
 		if (!two_spaces(line) && !is_comment(line))

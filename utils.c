@@ -11,7 +11,7 @@ void		print_struct_members(t_room *item)
 	ft_printf("y: %d\n", item->y);						
 	current = item->sosed;
 	if (item->sosed != NULL)
-		ft_printf("Sosedi: ")	;
+		ft_printf("Sosedi: ");
 	while (current != NULL)
 	{
 		ft_printf("%s ", current->room->name);
@@ -56,15 +56,13 @@ void	print_path(t_room *head, int *path, int len)
 	int i;
 
 	i = 0;
-	while (i < len)
+	ft_printf("{magenta}path: ");
+	while (i < len && path[i] != -1)
 	{
-		if (path[i] != -1)
-			ft_printf("%s ", find_by_id(head, path[i])->name);
-		else
-			ft_printf("-1 ");
+		ft_printf("%s ", find_by_id(head, path[i])->name);
 		i++;
 	}
-	ft_putchar('\n');
+	ft_printf("{eoc}\n");
 }
 
 void	ft_lstaddendroom(t_room **head, t_room *item)
@@ -95,7 +93,6 @@ void	ft_lstaddendsosed(t_sosed **head, t_sosed *item)
 		current = current->next;
 	current->next = item;
 }
-
 
 t_ants	*ft_lstaddendant(t_ants *head)
 {
