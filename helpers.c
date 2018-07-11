@@ -11,7 +11,7 @@ void		print_struct_members(t_room *item)
 	ft_printf("y: %d\n", item->y);						
 	current = item->sosed;
 	if (item->sosed != NULL)
-		ft_printf("Sosedi: ")	;
+		ft_printf("Sosedi: ");
 	while (current != NULL)
 	{
 		ft_printf("%s ", current->room->name);
