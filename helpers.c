@@ -45,3 +45,45 @@ int			two_spaces(char *line)
 		return (1);
 	return (0);
 }
+
+t_room	*get_end(t_room *head)
+{
+	t_room *cur;
+
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->type == 2)
+			return (cur);
+		cur = cur->next;
+	}
+	return (NULL);
+}
+
+t_room	*get_start(t_room *head)
+{
+	t_room *cur;
+
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->type == 1)
+			return (cur);
+		cur = cur->next;
+	}
+	return (NULL);
+}
+
+int		is_everybody_outside(t_ants *start, int end)
+{
+	t_ants *cur;
+
+	cur = start;
+	while (cur != NULL)
+	{
+		if (cur->pos != end)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}

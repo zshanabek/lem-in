@@ -104,5 +104,5 @@ int		main(void)
 	ft_putchar('\n');
 	exit_ants(ants, rooms, len);
 	ft_roomlstdel(&rooms);
-	// system("leaks lem-in");
+	system("leaks lem-in");
 }
