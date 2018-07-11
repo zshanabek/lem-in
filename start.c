@@ -28,6 +28,66 @@ static void		ft_roomlstdel(t_room **head)
 	*head = NULL;
 }
 
+int			list_length(t_room *item)
+{
+	int		size;
+	t_room	*cur;
+
+	size = 0;
+	cur = item;
+	while (cur != NULL)
+	{
+		size++;
+		cur = cur->next;
+	}
+	return (size);
+}
+
+void	iterate_list(t_room *start, int len)
+{
+	int		i;
+	int		j;
+	int		*way;
+	t_room	*cur;
+
+	i = 0;
+	cur = start;
+	while (cur != NULL)
+	{
+		j = 0;
+		way = malloc(sizeof(int) * len);
+		while (j < len)
+		{
+			way[j] = -1;
+			j++;
+		}
+		cur->way = way;
+		cur->id = i;
+		cur = cur->next;
+		i++;
+	}
+}
+
+t_ants *create_ants_list(int amount)
+{
+	int		i;	
+	t_ants	*start;
+	t_ants	*ant;
+
+	i = 2;
+	start = malloc(sizeof(t_ants *));
+	start->id = 1;
+	start->pos = -1;
+	start->next = NULL;
+	while (i < amount + 1)
+	{
+		ant = ft_lstaddendant(start);
+		ant->id = i;
+		i++;
+	}
+	return (start);
+}
+
 int		main(void)
 {
 	int		len;
