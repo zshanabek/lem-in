@@ -106,6 +106,7 @@ int		get_ants_amount(char *line, int *ants)
 		show_error();
 	*ants = ft_atoi(line);
 	ft_printf("%s\n", line);
+	free(line);
 	return (*ants);	
 }
 
@@ -131,14 +132,16 @@ t_room	*parse_farm(int *ants)
 		if (line[0] == '#')
 		{
 			if (type == 1 || type == 2)
-				ft_strdel(&line);
+				free(line);
 			continue;
 		}
 		ft_lstaddendroom(&head, insert_room(type, line));
 		type = 0;
-		ft_strdel(&line);
+		free(line);
 	}
-	if (!validate(head) || !parse_tubes(head, line))
+	if (!validate(head))
 		show_error();
+	parse_tubes(head, line);
+	free(line);
 	return (head);
 }

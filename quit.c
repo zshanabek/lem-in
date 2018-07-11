@@ -1,15 +1,3 @@
-/* ************************************************************************** */
-/*                                                                            */
-/*                                                        :::      ::::::::   */
-/*   quit.c                                             :+:      :+:    :+:   */
-/*                                                    +:+ +:+         +:+     */
-/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
-/*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/07/06 17:26:53 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/09 23:52:39 by zshanabe         ###   ########.fr       */
-/*                                                                            */
-/* ************************************************************************** */
-
 #include "lem-in.h"
 
 t_room	*get_end(t_room *head)
@@ -70,14 +58,47 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 		if (current->pos != 0 && current->pos != len && current->pos != -1)
 		{
 			if (path[current->pos] != -1)
+			{
 				ft_printf("{cyan}L%d-{eoc}{yellow}%s{eoc} ", current->id, 
 				find_by_id(rooms, path[current->pos])->name);
-			ok = 1;
+				ok = 1;				
+			}
 		}
 		current = current->next;
 	}
 	if (ok)
 		ft_putchar('\n');		
+}
+
+int		one_step(int *path, int len)
+{
+	int		i;	
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (i < len)
+	{
+		if (path[i] != -1)
+			count++;
+		i++;
+	}
+	if (count == 2)
+		return (1);
+	return (0);
+}
+
+void	exit_in_1_step(t_ants *head, char *end_name)
+{
+	t_ants *cur;
+
+	cur = head;
+	while (cur)
+	{
+		ft_printf("{cyan}L%d-{eoc}{yellow}%s{eoc} ", cur->id, end_name);
+		cur = cur->next;
+	}
+	ft_putchar('\n');
 }
 
 void	exit_ants(t_ants *start, t_room *rooms, int len)
@@ -88,9 +109,14 @@ void	exit_ants(t_ants *start, t_room *rooms, int len)
 	end = get_end(rooms);
 	path = end->way;
 	print_path(rooms, path, len);
-	while (!is_everybody_outside(start, len))
+	if (one_step(path, len))
+		exit_in_1_step(start, end->name);
+	else
 	{
-		move_ants(start, len);
-		print_ants_step(start, rooms, path, len);
+		while (!is_everybody_outside(start, len))
+		{
+			move_ants(start, len);
+			print_ants_step(start, rooms, path, len);
+		}
 	}
 }
