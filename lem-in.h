@@ -34,7 +34,7 @@ struct s_ants
 };
 
 t_room		*find_by_id(t_room *start, int id);
-t_room		*parse_farm(int *ants);
+t_room		*parse_farm(intmax_t *ants);
 void		parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
 void		print_struct_members(t_room *item);
@@ -48,7 +48,8 @@ void		algorithm(t_room *start, int len);
 void		iterate_list(t_room *start, int len);
 void		exit_ants(t_ants *start, t_room *rooms, int len);
 void		print_path(t_room *head, int *path, int len);
-int			validate(t_room *head);
+int			validate_se(t_room *head);
+int			validate(int type);
 void		show_error(void);
 int			is_comment(char *line);
 t_ants		*ft_lstaddendant(t_ants *head);

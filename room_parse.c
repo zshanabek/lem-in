@@ -34,6 +34,22 @@ int			unique_coordinates(t_room *head, int x, int y)
 	return (1);
 }
 
+int			validate_room_name(t_room *head, char *name)
+{
+	t_room *cur;
+
+	if (name[0] == 'L' || name[0] == '#' || name[0] == '-')
+		return (0);
+	cur = head;
+	while (cur != NULL)
+	{
+		if (ft_strequ(cur->name, name))
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
 t_room		*insert_room(t_room *head, int type, char *line)
 {
 	int		i;
@@ -52,7 +68,7 @@ t_room		*insert_room(t_room *head, int type, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	room->name = ft_strsub(line, 0, i);
-	if (room->name[0] == 'L')
+	if (!validate_room_name(head, room->name))
 		show_error();
 	i++;
 	room->x = ft_atoi(&line[i]);
@@ -64,7 +80,21 @@ t_room		*insert_room(t_room *head, int type, char *line)
 	return (room);
 }
 
-int			validate(t_room *head)
+int			validate(int type)
+{
+	static int i;
+	static int j;
+
+	if (type == 1)
+		i++;
+	if (type == 2)
+		j++;
+	if (i > 1 || j > 1)
+		return (0);
+	return (1);
+}
+
+int			validate_se(t_room *head)
 {
 	int		i;
 	t_room	*cur;
@@ -84,7 +114,7 @@ int			validate(t_room *head)
 	return (0);
 }
 
-int			get_ants_amount(char *line, int *ants)
+int			get_ants_amount(char *line, intmax_t *ants)
 {
 	intmax_t temp;
 
@@ -99,7 +129,7 @@ int			get_ants_amount(char *line, int *ants)
 	return (*ants);
 }
 
-t_room		*parse_farm(int *ants)
+t_room		*parse_farm(intmax_t *ants)
 {
 	int		type;
 	char	*line;
@@ -118,13 +148,11 @@ t_room		*parse_farm(int *ants)
 			ft_lstaddendroom(&head, insert_room(head, type, line));
 			type = 0;
 		}
-		if (!two_spaces(line) && !is_comment(line))
+		if (!validate(type) || (!two_spaces(line) && !is_comment(line)))
 			show_error();
 		ft_printf("%s\n", line);
 		free(line);
 	}
-	if (!validate(head))
-		exit(1);
 	parse_tubes(head, line);
 	return (head);
 }

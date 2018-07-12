@@ -68,7 +68,7 @@ void	iterate_list(t_room *start, int len)
 	}
 }
 
-t_ants *create_ants_list(int amount)
+t_ants *create_ants_list(intmax_t amount)
 {
 	int		i;	
 	t_ants	*start;
@@ -90,17 +90,17 @@ t_ants *create_ants_list(int amount)
 
 int		main(void)
 {
-	int		len;
-	int 	amount;
-	t_ants	*ants;
-	t_room	*rooms;
+	int			len;
+	intmax_t	amount;
+	t_ants		*ants;
+	t_room		*rooms;
 
 	rooms = parse_farm(&amount);
-	if (!validate(rooms))
+	if (!validate_se(rooms))
 		show_error();
 	len = list_length(rooms);	
 	iterate_list(rooms, len);
-	print_list(rooms);
+	// print_list(rooms);
 	algorithm(rooms, len);
 	ants = create_ants_list(amount);
 	ft_putchar('\n');
