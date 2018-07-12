@@ -52,6 +52,8 @@ t_room		*insert_room(t_room *head, int type, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	room->name = ft_strsub(line, 0, i);
+	if (room->name[0] == 'L')
+		show_error();
 	i++;
 	room->x = ft_atoi(&line[i]);
 	while (line[i] && line[i] != ' ')

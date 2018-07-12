@@ -14,13 +14,12 @@ t_room	*search(t_room *head, char *name)
 	return (0);
 }
 
-t_sosed	*ft_allocate_mem(t_room *r)
+t_sosed	*ft_allocate_mem()
 {
 	t_sosed *sosed;
 
 	sosed = malloc(sizeof(t_sosed));
 	sosed->next = NULL;
-	sosed->room = r;
 	return (sosed);
 }
 
@@ -48,8 +47,12 @@ void	create_tube(t_room *h, char *line)
 		free(temp);
 		show_error();
 	}
-	sosed = ft_allocate_mem(r);
+	sosed = ft_allocate_mem();
+	sosed->room = r;
 	ft_lstaddendsosed(&room->sosed, sosed);
+	sosed = ft_allocate_mem();
+	ft_lstaddendsosed(&r->sosed, sosed);
+	sosed->room = room;
 	free(temp);
 }
 
