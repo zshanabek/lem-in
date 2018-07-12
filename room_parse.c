@@ -79,8 +79,7 @@ int			validate(t_room *head)
 	}
 	if (i == 2)
 		return (1);
-	else
-		return (0);
+	return (0);
 }
 
 int			get_ants_amount(char *line, int *ants)
@@ -90,7 +89,7 @@ int			get_ants_amount(char *line, int *ants)
 	get_next_line(0, &line);
 	if (is_line_valid(line))
 		temp = ft_atoimax(line);
-	if (temp >= 2147483647)
+	if (temp >= 2147483647 || temp <= 0)
 		show_error();
 	*ants = ft_atoi(line);
 	ft_printf("%s\n", line);
@@ -122,6 +121,8 @@ t_room		*parse_farm(int *ants)
 		ft_printf("%s\n", line);
 		free(line);
 	}
+	if (!validate(head))
+		exit(1);
 	parse_tubes(head, line);
 	return (head);
 }
