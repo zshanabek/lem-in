@@ -1,6 +1,6 @@
 #include "lem-in.h"
 
-int check_coordinates(char *line)
+int			check_coordinates(char *line)
 {
 	int i;
 
@@ -20,11 +20,25 @@ int check_coordinates(char *line)
 	return (1);
 }
 
-t_room		*insert_room(int type, char *line)
+int			unique_coordinates(t_room *head, int x, int y)
 {
-	int i;
-	t_room *room;
-	
+	t_room *cur;
+
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->x == x && cur->y == y)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
+t_room		*insert_room(t_room *head, int type, char *line)
+{
+	int		i;
+	t_room	*room;
+
 	i = 0;
 	if (!check_coordinates(line))
 		show_error();
@@ -43,13 +57,15 @@ t_room		*insert_room(int type, char *line)
 	while (line[i] && line[i] != ' ')
 		i++;
 	room->y = ft_atoi(&line[i]);
+	if (!unique_coordinates(head, room->x, room->y))
+		show_error();
 	return (room);
 }
 
-int		validate(t_room *head)
+int			validate(t_room *head)
 {
-	t_room *cur;
-	int i;
+	int		i;
+	t_room	*cur;
 
 	i = 0;
 	cur = head;
@@ -67,35 +83,7 @@ int		validate(t_room *head)
 		return (0);
 }
 
-int		is_digital(char *line)
-{
-	int i;
-
-	i = 0;
-	while (line[i])
-	{
-		if (!ft_isdigit(line[i]))
-			return (0);			
-		i++;
-	}
-	return (1);
-}
-
-int		is_comment(char *line)
-{
-	if (line[0] == '#')
-		return (1);
-	return (0);
-}
-
-int		is_line_valid(char *line)
-{
-	if (ft_isempty(line) || (!is_comment(line) && !is_digital(line)))
-		show_error();
-	return (1);
-}
-
-int		get_ants_amount(char *line, int *ants)
+int			get_ants_amount(char *line, int *ants)
 {
 	intmax_t temp;
 
@@ -106,10 +94,11 @@ int		get_ants_amount(char *line, int *ants)
 		show_error();
 	*ants = ft_atoi(line);
 	ft_printf("%s\n", line);
-	return (*ants);	
+	free(line);
+	return (*ants);
 }
 
-t_room	*parse_farm(int *ants)
+t_room		*parse_farm(int *ants)
 {
 	int		type;
 	char	*line;
@@ -121,24 +110,18 @@ t_room	*parse_farm(int *ants)
 	get_ants_amount(line, ants);
 	while (get_next_line(0, &line) && !ft_strchr(line, '-'))
 	{
+		type = (ft_strequ(line, "##start")) ? 1 : type;
+		type = (ft_strequ(line, "##end")) ? 2 : type;
+		if (two_spaces(line))
+		{
+			ft_lstaddendroom(&head, insert_room(head, type, line));
+			type = 0;
+		}
 		if (!two_spaces(line) && !is_comment(line))
 			show_error();
-		if (line[0] == '#' && !ft_strcmp(line, "##start"))
-			type = 1;
-		else if (line[0] == '#' && !ft_strcmp(line, "##end"))
-			type = 2;
 		ft_printf("%s\n", line);
-		if (line[0] == '#')
-		{
-			if (type == 1 || type == 2)
-				ft_strdel(&line);
-			continue;
-		}
-		ft_lstaddendroom(&head, insert_room(type, line));
-		type = 0;
-		ft_strdel(&line);
+		free(line);
 	}
-	if (!validate(head) || !parse_tubes(head, line))
-		show_error();
+	parse_tubes(head, line);
 	return (head);
 }

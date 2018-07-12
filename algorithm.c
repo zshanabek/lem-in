@@ -11,20 +11,6 @@ int		is_in_array(int num, int *arr, int len)
 	return (0);
 }
 
-t_room	*get_start(t_room *head)
-{
-	t_room *cur;
-
-	cur = head;
-	while (cur != NULL)
-	{
-		if (cur->type == 1)
-			return (cur);
-		cur = cur->next;
-	}
-	return (NULL);
-}
-
 void	enqueue(int num, int *arr, int len)
 {
 	int i;

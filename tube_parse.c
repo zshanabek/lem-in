@@ -14,42 +14,50 @@ t_room	*search(t_room *head, char *name)
 	return (0);
 }
 
-int		create_tube(t_room *head, char *line)
+t_sosed	*ft_allocate_mem(t_room *r)
+{
+	t_sosed *sosed;
+
+	sosed = malloc(sizeof(t_sosed));
+	sosed->next = NULL;
+	sosed->room = r;
+	return (sosed);
+}
+
+void	create_tube(t_room *h, char *line)
 {
 	int			i;
+	char		*temp;
+	t_room		*r;
 	t_room		*room;
-	t_room 		*room2;
 	t_sosed		*sosed;
-	char 		*temp;
 
 	i = 0;
 	while (line[i] && line[i] != '-')
 		i++;
-	if ((room = search(head, (temp = ft_strsub(line, 0, i)))) == 0)
+	temp = ft_strsub(line, 0, i);
+	if ((room = search(h, temp)) == 0)
 	{
 		free(temp);
-		return (0);
+		show_error();
 	}
-	free(temp);	
-	if ((room2 = search(head, (temp = ft_strsub(line, ++i, ft_strlen(line))))) != 0)
+	free(temp);
+	temp = ft_strsub(line, ++i, ft_strlen(line));
+	if ((r = search(h, temp)) == 0)
 	{
-		sosed = malloc(sizeof(t_sosed));
-		sosed->next = NULL;
-		sosed->room = room2;
-		ft_lstaddendsosed(&room->sosed, sosed);
 		free(temp);
+		show_error();
 	}
-	else
-		return (0);
-	return (1);
+	sosed = ft_allocate_mem(r);
+	ft_lstaddendsosed(&room->sosed, sosed);
+	free(temp);
 }
 
-int		parse_tubes(t_room *head, char *line)
+void	parse_tubes(t_room *head, char *line)
 {
-	if (!create_tube(head, line))
-		return (0);
-	ft_printf("%s\n", line);	
-	ft_strdel(&line);
+	create_tube(head, line);
+	ft_printf("%s\n", line);
+	free(line);	
 	while (get_next_line(0, &line))
 	{
 		if (is_comment(line))
@@ -57,14 +65,8 @@ int		parse_tubes(t_room *head, char *line)
 			ft_printf("%s\n", line);
 			continue;
 		}
-		if (!create_tube(head, line))
-		{
-			ft_strdel(&line);		
-			return (0);
-		}
+		create_tube(head, line);
 		ft_printf("%s\n", line);
-		ft_strdel(&line);
+		free(line);
 	}
-	ft_strdel(&line);
-	return (1);
 }

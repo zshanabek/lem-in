@@ -35,14 +35,13 @@ struct s_ants
 
 t_room		*find_by_id(t_room *start, int id);
 t_room		*parse_farm(int *ants);
-int			parse_tubes(t_room *head, char *line);
+void		parse_tubes(t_room *head, char *line);
 int			two_spaces(char *line);
 void		print_struct_members(t_room *item);
 void		print_list(t_room *head);
 void		print_ants_list(t_ants *head);
 void		ft_lstaddendroom(t_room **head, t_room *item);
 void		ft_lstaddendsosed(t_sosed **head, t_sosed *item);
-t_ants 		*create_ants_list(int amount);
 int			list_length(t_room *item);
 void		fill_matrix(t_room *start, int **matrix, int len);
 void		algorithm(t_room *start, int len);
@@ -52,4 +51,9 @@ void		print_path(t_room *head, int *path, int len);
 int			validate(t_room *head);
 void		show_error(void);
 int			is_comment(char *line);
+t_ants		*ft_lstaddendant(t_ants *head);
+int			is_line_valid(char *line);
+int			is_everybody_outside(t_ants *start, int end);
+t_room		*get_end(t_room *head);
+t_room		*get_start(t_room *head);
 #endif
