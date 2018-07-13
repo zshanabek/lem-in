@@ -41,6 +41,8 @@ int		bfs(t_room *start, int *queue, int num, int len)
 	t_sosed		*scur;
 
 	cur = find_by_id(start, num);
+	if (num == -1)
+		return (1);
 	cur->is_visited = 1;
 	scur = cur->sosed;
 	while (scur != NULL)
@@ -55,11 +57,11 @@ int		bfs(t_room *start, int *queue, int num, int len)
 		if (scur->room->type == 2)
 		{
 			enqueue(scur->room->id, scur->room->way, len);
-			return (0);
+			return (1);
 		}
 		scur = scur->next;
 	}
-	return (1);
+	return (0);
 }
 
 void	algorithm(t_room *head, int len)
@@ -77,7 +79,7 @@ void	algorithm(t_room *head, int len)
 	i = 0;
 	start = get_start(head);
 	queue[i] = start->id;
-	while (i < len && bfs(head, queue, queue[i], len))
+	while (i < len && !bfs(head, queue, queue[i], len))
 		i++;
 	if (get_end(head)->way[0] != start->id)
 		show_error();

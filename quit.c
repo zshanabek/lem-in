@@ -80,7 +80,6 @@ void	exit_ants(t_ants *start, t_room *rooms, int len)
 
 	end = get_end(rooms);
 	path = end->way;
-	print_path(rooms, path, len);
 	if (one_step(path, len))
 		exit_in_1_step(start, end->name);
 	else

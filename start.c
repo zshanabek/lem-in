@@ -94,6 +94,7 @@ int		main(void)
 	intmax_t	amount;
 	t_ants		*ants;
 	t_room		*rooms;
+	int		*path;
 
 	rooms = parse_farm(&amount);
 	if (!validate_se(rooms))
@@ -102,9 +103,11 @@ int		main(void)
 	iterate_list(rooms, len);
 	// print_list(rooms);
 	algorithm(rooms, len);
-	ants = create_ants_list(amount);
-	ft_putchar('\n');
-	exit_ants(ants, rooms, len);
-	ft_roomlstdel(&rooms);
+	path = get_end(rooms)->way;
+	print_path(rooms, path, len);
+	// ants = create_ants_list(amount);
+	// ft_putchar('\n');
+	// exit_ants(ants, rooms, len);
+	// ft_roomlstdel(&rooms);
 	// system("leaks lem-in");
 }
