@@ -62,10 +62,11 @@ int		bfs(t_room *start, int *queue, int num, int len)
 	return (1);
 }
 
-void	algorithm(t_room *start, int len)
+void	algorithm(t_room *head, int len)
 {
 	int			i;
 	int			queue[len];
+	t_room		*start;
 
 	i = 0;
 	while (i < len)
@@ -74,7 +75,10 @@ void	algorithm(t_room *start, int len)
 		i++;
 	}
 	i = 0;
-	queue[i] = get_start(start)->id;
-	while (i < len && bfs(start, queue, queue[i], len))
+	start = get_start(head);
+	queue[i] = start->id;
+	while (i < len && bfs(head, queue, queue[i], len))
 		i++;
+	if (get_end(head)->way[0] != start->id)
+		show_error();
 }
