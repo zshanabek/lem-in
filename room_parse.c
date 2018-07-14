@@ -186,7 +186,7 @@ t_room		*parse_farm(intmax_t *ants)
 		ft_printf("%s\n", line);
 		free(line);
 	}
-	if (line == NULL)
+	if (!validate_se(head) || (line == NULL))
 		show_error();
 	parse_tubes(head, line);
 	return (head);
