@@ -118,7 +118,8 @@ int			get_ants_amount(char *line, intmax_t *ants)
 {
 	intmax_t temp;
 
-	get_next_line(0, &line);
+	if (get_next_line(0, &line) != 1)
+		show_error();
 	if (is_line_valid(line))
 		temp = ft_atoimax(line);
 	if (temp >= 2147483647 || temp <= 0)
@@ -143,6 +144,13 @@ t_room		*parse_farm(intmax_t *ants)
 	{
 		type = (ft_strequ(line, "##start")) ? 1 : type;
 		type = (ft_strequ(line, "##end")) ? 2 : type;
+		if (type == 1 || type == 2)
+		{
+			ft_printf("%s\n", line);
+			get_next_line(0, &line);
+			if (!two_spaces(line))
+				show_error();
+		}
 		if (two_spaces(line))
 		{
 			ft_lstaddendroom(&head, insert_room(head, type, line));
@@ -153,6 +161,8 @@ t_room		*parse_farm(intmax_t *ants)
 		ft_printf("%s\n", line);
 		free(line);
 	}
+	if (line == NULL)
+		show_error();
 	parse_tubes(head, line);
 	return (head);
 }

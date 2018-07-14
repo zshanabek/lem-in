@@ -104,10 +104,10 @@ int		main(void)
 	// print_list(rooms);
 	algorithm(rooms, len);
 	path = get_end(rooms)->way;
+	ft_putchar('\n');	
 	print_path(rooms, path, len);
-	// ants = create_ants_list(amount);
-	// ft_putchar('\n');
-	// exit_ants(ants, rooms, len);
-	// ft_roomlstdel(&rooms);
+	ants = create_ants_list(amount);
+	exit_ants(ants, rooms, len);
+	ft_roomlstdel(&rooms);
 	// system("leaks lem-in");
 }
