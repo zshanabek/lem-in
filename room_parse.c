@@ -148,7 +148,7 @@ t_room		*parse_farm(intmax_t *ants)
 		{
 			ft_printf("%s\n", line);
 			get_next_line(0, &line);
-			if (!two_spaces(line))
+			if (!validate(type) || !two_spaces(line))
 				show_error();
 		}
 		if (two_spaces(line))
@@ -156,7 +156,7 @@ t_room		*parse_farm(intmax_t *ants)
 			ft_lstaddendroom(&head, insert_room(head, type, line));
 			type = 0;
 		}
-		if (!validate(type) || (!two_spaces(line) && !is_comment(line)))
+		if (!two_spaces(line) && !is_comment(line))
 			show_error();
 		ft_printf("%s\n", line);
 		free(line);
