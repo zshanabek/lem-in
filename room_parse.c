@@ -116,6 +116,7 @@ int			validate(int type)
 		j++;
 	if (i > 1 || j > 1)
 		return (0);
+	ft_printf("ok: %d %d\n", i, j);
 	return (1);
 }
 
@@ -169,11 +170,13 @@ t_room		*parse_farm(intmax_t *ants)
 	{
 		type = (ft_strequ(line, "##start")) ? 1 : type;
 		type = (ft_strequ(line, "##end")) ? 2 : type;
+		if (!validate(type))
+			show_error();		
 		if (type == 1 || type == 2)
 		{
 			ft_printf("%s\n", line);
-			get_next_line(0, &line);
-			if (!validate(type) || !two_spaces(line))
+			get_next_line(0, &line);		
+			if (!two_spaces(line))
 				show_error();
 		}
 		if (two_spaces(line))
