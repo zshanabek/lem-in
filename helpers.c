@@ -21,10 +21,12 @@ int		is_comment(char *line)
 	return (0);
 }
 
-int 	is_command(char *line)
+int 	room_type(char *line)
 {
-	if (ft_strequ(line, "##start") || ft_strequ(line, "##end"))
+	if (ft_strequ(line, "##start"))
 		return (1);
+	else if (ft_strequ(line, "##end"))
+		return (2);
 	return (0);
 }
 

@@ -128,8 +128,7 @@ int			is_cmd_repeated(char *line)
 	static int	j;
 
 	type = 0;
-	type = (ft_strequ(line, "##start")) ? 1 : type;
-	type = (ft_strequ(line, "##end")) ? 2 : type;
+	type = room_type(line);
 	if (type == 1)
 		i++;
 	if (type == 2)
@@ -155,7 +154,7 @@ t_room	*parse(int *amount)
 			show_error();
 		if (*amount == -1)
 			get_ants_amount(amount, &fline, line);
-		if (flag == 0 && (check_room(line) || is_command(line)))
+		if (flag == 0 && (check_room(line) || room_type(line) != 0))
 			get_rooms(&head, line);
 		else if (check_link(line))
 			create_links(head, &flag, line);
