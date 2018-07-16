@@ -34,8 +34,7 @@ struct s_ants
 };
 
 t_room		*find_by_id(t_room *start, int id);
-t_room		*parse_farm(intmax_t *ants);
-void		parse_tubes(t_room *head, char *line);
+t_room		*parse(int *amount);
 int			two_spaces(char *line);
 void		print_struct_members(t_room *item);
 void		print_list(t_room *head);

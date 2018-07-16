@@ -90,22 +90,8 @@ t_ants *create_ants_list(intmax_t amount)
 
 int		main(void)
 {
-	int			len;
-	intmax_t	amount;
-	t_ants		*ants;
+	int			amount;
 	t_room		*rooms;
-	int		*path;
 
-	rooms = parse_farm(&amount);
-	len = list_length(rooms);	
-	iterate_list(rooms, len);
-	// print_list(rooms);
-	algorithm(rooms, len);
-	path = get_end(rooms)->way;
-	ft_putchar('\n');	
-	print_path(rooms, path, len);
-	ants = create_ants_list(amount);
-	exit_ants(ants, rooms, len);
-	ft_roomlstdel(&rooms);
-	// system("leaks lem-in");
+	rooms = parse(&amount);
 }
