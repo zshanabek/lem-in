@@ -21,6 +21,13 @@ int		is_comment(char *line)
 	return (0);
 }
 
+int 	is_command(char *line)
+{
+	if (ft_strequ(line, "##start") || ft_strequ(line, "##end"))
+		return (1);
+	return (0);
+}
+
 int		is_line_valid(char *line)
 {
 	if (ft_isempty(line) || (!is_comment(line) && !is_digital(line)))

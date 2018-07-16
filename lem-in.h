@@ -35,14 +35,11 @@ struct s_ants
 
 t_room		*find_by_id(t_room *start, int id);
 t_room		*parse(int *amount);
-int			two_spaces(char *line);
 void		print_struct_members(t_room *item);
 void		print_list(t_room *head);
 void		print_ants_list(t_ants *head);
 void		ft_lstaddendroom(t_room **head, t_room *item);
 void		ft_lstaddendsosed(t_sosed **head, t_sosed *item);
-int			list_length(t_room *item);
-void		fill_matrix(t_room *start, int **matrix, int len);
 void		algorithm(t_room *start, int len);
 void		iterate_list(t_room *start, int len);
 void		exit_ants(t_ants *start, t_room *rooms, int len);
@@ -56,5 +53,6 @@ int			is_line_valid(char *line);
 int			is_everybody_outside(t_ants *start, int end);
 t_room		*get_end(t_room *head);
 t_room		*get_start(t_room *head);
-void		create_links(t_room *h, char *line);
+void		create_links(t_room *h, int *flag, char *line);
+int			is_command(char *line);
 #endif

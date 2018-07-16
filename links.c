@@ -24,7 +24,27 @@ void	create_link(t_room *room1, t_room *room2)
 	ft_lstaddendsosed(&room1->sosed, sosed);	
 }
 
-void	create_links(t_room *h, char *line)
+int			validate_se(t_room *head)
+{
+	int		i;
+	t_room	*cur;
+
+	i = 0;
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->type == 1)
+			i++;
+		if (cur->type == 2)
+			i++;
+		cur = cur->next;
+	}
+	if (i == 2)
+		return (1);
+	return (0);
+}
+
+void	create_links(t_room *h, int *flag, char *line)
 {
 	int			i;
 	char		*temp;
@@ -32,6 +52,9 @@ void	create_links(t_room *h, char *line)
 	t_room		*room1;
 
 	i = 0;
+	*flag = 1;
+	// if (!validate_se(h))
+	// 	show_error();
 	while (line[i] && line[i] != '-')
 		i++;
 	temp = ft_strsub(line, 0, i);

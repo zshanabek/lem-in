@@ -76,31 +76,27 @@ void	take_coordinates(t_room *room, int i, char *line)
 	room->y = ft_atoi(&line[i]);
 }
 
-t_room		*insert_room(char *line)
+void	get_rooms(t_room **head, char *line)
 {
 	int		i;
 	char	*name;
 	t_room	*room;
+	static int	type;
 
-	room = create_room();	
-	i = 0;	
-	while (line[i] && line[i] != ' ')
-		i++;
-	name = ft_strsub(line, 0, i);
-	room->name = name;
-	take_coordinates(room, i, line);
-	return (room);
-}
-
-void get_rooms(t_room **head, char *line)
-{
-	t_room *room;
-
+	type = (ft_strequ(line, "##start")) ? 1 : type;
+	type = (ft_strequ(line, "##end")) ? 2 : type;
 	if (check_room(line))
 	{
-		room = insert_room(line);
-		room->type = 0;
+		room = create_room();
+		i = 0;
+		while (line[i] && line[i] != ' ')
+			i++;
+		name = ft_strsub(line, 0, i);
+		room->name = name;
+		take_coordinates(room, i, line);
+		room->type = type;
 		ft_lstaddendroom(head, room);
+		type = 0;
 	}
 }
 
@@ -124,20 +120,23 @@ int	check_link(char *line)
 
 t_room	*parse(int *amount)
 {
-	int 	fline;	
+	int 	fline;
+	int		flag;	
 	char	*line;
 	t_room	*head;
+	int		type;
 
 	*amount = -1;
-	line = NULL;
+	flag = 0;
 	head = NULL;
 	while (get_next_line(0, &line))
 	{
 		if (*amount == -1)
 			get_ants_amount(amount, &fline, line);
-		get_rooms(&head, line);
-		if (check_link(line))
-			create_links(head, line);
+		if ((check_room(line) || is_command(line)) && flag == 0)
+			get_rooms(&head, line);
+		else if (check_link(line))
+			create_links(head, &flag, line);
 		free(line);
 	}
 	return (head);
