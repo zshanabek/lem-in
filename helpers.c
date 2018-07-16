@@ -31,7 +31,7 @@ int 	is_command(char *line)
 int		is_line_valid(char *line)
 {
 	if (ft_isempty(line) || (!is_comment(line) && !is_digital(line)))
-		show_error();
+		return (0);
 	return (1);
 }
 

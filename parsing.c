@@ -52,6 +52,8 @@ void	get_ants_amount(int *amount, int *fline, char *line)
 		else
 			show_error();
 	}
+	else
+		show_error();
 }
 
 t_room *create_room()
