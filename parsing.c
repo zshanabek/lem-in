@@ -154,10 +154,12 @@ t_room	*parse(int *amount)
 			show_error();
 		if (*amount == -1)
 			get_ants_amount(amount, &fline, line);
-		if (flag == 0 && (check_room(line) || room_type(line) != 0))
+		else if (flag == 0 && (check_room(line) || room_type(line) != 0))
 			get_rooms(&head, line);
 		else if (check_link(line))
 			create_links(head, &flag, line);
+		else if (!is_comment(line))
+			show_error();
 		ft_printf("%s\n", line);
 		free(line);
 	}
