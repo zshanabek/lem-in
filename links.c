@@ -33,15 +33,13 @@ int			validate_se(t_room *head)
 	cur = head;
 	while (cur != NULL)
 	{
-		if (cur->type == 1)
-			i++;
-		if (cur->type == 2)
+		if (cur->type == 1 || cur->type == 2)
 			i++;
 		cur = cur->next;
 	}
-	if (i == 2)
-		return (1);
-	return (0);
+	if (i != 2)
+		return (0);
+	return (1);
 }
 
 void	create_links(t_room *h, int *flag, char *line)
@@ -52,9 +50,9 @@ void	create_links(t_room *h, int *flag, char *line)
 	t_room		*room1;
 
 	i = 0;
+	if (*flag == 0 && !validate_se(h))
+		show_error();
 	*flag = 1;
-	// if (!validate_se(h))
-	// 	show_error();
 	while (line[i] && line[i] != '-')
 		i++;
 	temp = ft_strsub(line, 0, i);

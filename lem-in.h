@@ -14,7 +14,6 @@ struct	s_room
 	int 		id;
 	int			type;
 	int			is_visited;
-	int			is_closed;
 	int 		*way;
 	t_sosed		*sosed;
 	t_room		*next;
@@ -45,7 +44,6 @@ void		iterate_list(t_room *start, int len);
 void		exit_ants(t_ants *start, t_room *rooms, int len);
 void		print_path(t_room *head, int *path, int len);
 int			validate_se(t_room *head);
-int			validate(int type);
 void		show_error(void);
 int			is_comment(char *line);
 t_ants		*ft_lstaddendant(t_ants *head);
