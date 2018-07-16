@@ -9,11 +9,29 @@ int		is_digital(char *line)
 		return (0);
 	while (line[i])
 	{
-		if (!ft_isdigit(line[i]))
+		if (!ft_isdigit(line[i]) && line[i] != '-')
 			return (0);			
 		i++;
 	}
 	return (1);
+}
+
+int			two_spaces(char *line)
+{
+	int		i;
+	int		count;
+
+	i = 0;
+	count = 0;
+	while (line[i])
+	{
+		if (line[i] == ' ')
+			count++;
+		i++;
+	}
+	if (count == 2)
+		return (1);
+	return (0);
 }
 
 int		is_comment(char *line)

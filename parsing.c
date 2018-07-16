@@ -18,27 +18,7 @@ int		is_valid_name(t_room *head, char *name)
 	return (1);
 }
 
-int			check_room(char *line)
-{
-	int i;
 
-	i = 0;
-	while (line[i] && line[i] != ' ')
-		i++;
-	if (line[i] != ' ')
-		return (0);
-	i++;
-	while (line[i] && ft_isdigit(line[i]))
-		i++;
-	if (line[i] != ' ')
-		return (0);
-	i++;
-	while (line[i] && ft_isdigit(line[i]))
-		i++;
-	if (line[i] != 0)
-		return (0);
-	return (1);
-}
 
 void	get_ants_amount(int *amount, int *fline, char *line)
 {
@@ -68,36 +48,27 @@ t_room *create_room()
 	return (room);
 }
 
-void	take_coordinates(t_room *room, int i, char *line)
-{
-	i++;
-	room->x = ft_atoi(&line[i]);
-	while (line[i] && ft_isdigit(line[i]))
-		i++;
-	i++;
-	room->y = ft_atoi(&line[i]);
-}
-
 void	get_rooms(t_room **head, char *line)
 {
 	int		i;
 	char	*name;
+	char 	**arr;
 	t_room	*room;
 	static int	type;
 
 	type = (ft_strequ(line, "##start")) ? 1 : type;
 	type = (ft_strequ(line, "##end")) ? 2 : type;
-	if (check_room(line))
+	if (two_spaces(line))
 	{
 		room = create_room();
-		i = 0;
-		while (line[i] && line[i] != ' ')
-			i++;
-		name = ft_strsub(line, 0, i);
-		if (!is_valid_name(*head, line))
+		arr = ft_strsplit(line, ' ');
+		if (!is_valid_name(*head, arr[0]))
 			show_error();
-		room->name = name;
-		take_coordinates(room, i, line);
+		if (!is_digital(arr[1]) || !is_digital(arr[2]))
+			show_error();
+		room->name = arr[0];
+		room->x = ft_atoi(arr[1]);
+		room->y = ft_atoi(arr[2]);		
 		room->type = type;
 		ft_lstaddendroom(head, room);
 		type = 0;
@@ -154,7 +125,7 @@ t_room	*parse(int *amount)
 			show_error();
 		if (*amount == -1)
 			get_ants_amount(amount, &fline, line);
-		else if (flag == 0 && (check_room(line) || room_type(line) != 0))
+		else if (flag == 0 && (two_spaces(line) || room_type(line) != 0))
 			get_rooms(&head, line);
 		else if (check_link(line))
 			create_links(head, &flag, line);

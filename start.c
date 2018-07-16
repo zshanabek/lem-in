@@ -95,14 +95,14 @@ int		main(void)
 	t_ants		*ants;
 	t_room		*rooms;
 	int			*path;
-
+	
 	rooms = parse(&amount);
-	len = list_length(rooms);	
+	len = list_length(rooms);
 	iterate_list(rooms, len);
 	// print_list(rooms);
 	algorithm(rooms, len);
 	path = get_end(rooms)->way;
-	ft_putchar('\n');	
+	ft_putchar('\n');
 	print_path(rooms, path, len);
 	ants = create_ants_list(amount);
 	exit_ants(ants, rooms, len);

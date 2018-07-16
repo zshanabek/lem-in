@@ -53,5 +53,7 @@ t_room		*get_start(t_room *head);
 void		create_links(t_room *h, int *flag, char *line);
 int 		room_type(char *line);
 int			check_link(char *line);
-int		is_digital(char *line);
+int			is_digital(char *line);
+int			two_spaces(char *line);
+
 #endif
