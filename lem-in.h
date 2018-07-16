@@ -56,4 +56,5 @@ int			is_line_valid(char *line);
 int			is_everybody_outside(t_ants *start, int end);
 t_room		*get_end(t_room *head);
 t_room		*get_start(t_room *head);
+void		create_links(t_room *h, char *line);
 #endif

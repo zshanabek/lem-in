@@ -94,4 +94,5 @@ int		main(void)
 	t_room		*rooms;
 
 	rooms = parse(&amount);
+	print_list(rooms);
 }

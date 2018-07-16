@@ -28,24 +28,6 @@ int		is_line_valid(char *line)
 	return (1);
 }
 
-int			two_spaces(char *line)
-{
-	int		i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ')
-			count++;
-		i++;
-	}
-	if (count == 2)
-		return (1);
-	return (0);
-}
-
 t_room	*get_end(t_room *head)
 {
 	t_room *cur;

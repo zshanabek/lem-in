@@ -92,7 +92,7 @@ t_room		*insert_room(char *line)
 	return (room);
 }
 
-void get_rooms(t_room *head, char *line)
+void get_rooms(t_room **head, char *line)
 {
 	t_room *room;
 
@@ -100,23 +100,45 @@ void get_rooms(t_room *head, char *line)
 	{
 		room = insert_room(line);
 		room->type = 0;
-		print_struct_members(room);
+		ft_lstaddendroom(head, room);
 	}
 }
 
+int	check_link(char *line)
+{
+	int i;
+
+	i = 0;
+	while (line[i] && line[i] != '-' && line[i] != ' ')
+		i++;
+	if (line[i] != '-')
+		return (0);
+	i++;
+	while (line[i] && line[i] != '-' && line[i] != ' ')
+		i++;
+	if (line[i] != 0)
+		return (0);
+	return (1);
+}
+
+
 t_room	*parse(int *amount)
 {
+	int 	fline;	
 	char	*line;
-	int 	fline;
 	t_room	*head;
+
 	*amount = -1;
 	line = NULL;
+	head = NULL;
 	while (get_next_line(0, &line))
 	{
 		if (*amount == -1)
 			get_ants_amount(amount, &fline, line);
-		get_rooms(head, line);
+		get_rooms(&head, line);
+		if (check_link(line))
+			create_links(head, line);
 		free(line);
 	}
-	return (0);
+	return (head);
 }
