@@ -5,6 +5,8 @@ int		is_digital(char *line)
 	int i;
 
 	i = 0;
+	if (line == NULL)
+		return (0);
 	while (line[i])
 	{
 		if (!ft_isdigit(line[i]))
@@ -28,13 +30,6 @@ int 	room_type(char *line)
 	else if (ft_strequ(line, "##end"))
 		return (2);
 	return (0);
-}
-
-int		is_line_valid(char *line)
-{
-	if (ft_isempty(line) || (!is_comment(line) && !is_digital(line)))
-		return (0);
-	return (1);
 }
 
 t_room	*get_end(t_room *head)

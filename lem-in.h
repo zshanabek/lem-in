@@ -47,12 +47,11 @@ int			validate_se(t_room *head);
 void		show_error(void);
 int			is_comment(char *line);
 t_ants		*ft_lstaddendant(t_ants *head);
-int			is_line_valid(char *line);
 int			is_everybody_outside(t_ants *start, int end);
 t_room		*get_end(t_room *head);
 t_room		*get_start(t_room *head);
 void		create_links(t_room *h, int *flag, char *line);
 int 		room_type(char *line);
-int	check_link(char *line);
-
+int			check_link(char *line);
+int		is_digital(char *line);
 #endif

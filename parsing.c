@@ -44,7 +44,7 @@ void	get_ants_amount(int *amount, int *fline, char *line)
 {
 	intmax_t temp;
 
-	if (is_line_valid(line))
+	if (!is_comment(line) && is_digital(line))
 	{
 		temp = ft_atoi(line);
 		if (temp <= 2147483647 && temp > 0)
