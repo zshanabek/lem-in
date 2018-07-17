@@ -83,11 +83,12 @@ void	get_rooms(t_room **head, char *line)
 			show_error();
 		if (!is_digital(arr[1]) || !is_digital(arr[2]))
 			show_error();
-		room->name = arr[0];
+		room->name = ft_strdup(arr[0]);
 		room->x = ft_atoi(arr[1]);
 		room->y = ft_atoi(arr[2]);
 		if (!unique_coordinates(*head, room->x, room->y))
-			show_error();	
+			show_error();
+		ft_del2darr(arr);
 		room->type = type;
 		ft_lstaddendroom(head, room);
 		type = 0;

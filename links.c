@@ -60,4 +60,6 @@ void	create_links(t_room *h, int *flag, char *line)
 		show_error();
 	create_link(room1, room2);
 	create_link(room2, room1);
+	ft_del2darr(arr);
+
 }

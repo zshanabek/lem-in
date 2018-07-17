@@ -109,4 +109,5 @@ int		main(void)
 	ants = create_ants_list(amount);
 	exit_ants(ants, rooms, len);
 	ft_roomlstdel(&rooms);
+	system("leaks lem-in");
 }
