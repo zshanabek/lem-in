@@ -1,8 +1,5 @@
 NAME = lem-in
-FLAGS = -Wall -Wextra -Werror -Winit-self -Wunreachable-code -Wformat-y2k	   \
--Wformat-nonliteral -Wformat-security -Wformat=2 -Wmissing-include-dirs 	   \
--Wswitch-default -Wtrigraphs -Wstrict-overflow=5 -Wfloat-equal -Wundef		   \
--Wshadow -Wbad-function-cast
+FLAGS = -Wall -Wextra -Werror
 SRC	= start.c parsing.c links.c helpers.c algorithm.c quit.c utils.c
 LIB	= ./libft/libft.a
 
