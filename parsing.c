@@ -149,10 +149,10 @@ t_room	*parse(int *amount)
 			create_links(head, &flag, line);
 		else if (!is_comment(line))
 			show_error();
+		if (room_type(line) != 0 && flag == 1)
+			show_error();
 		ft_printf("%s\n", line);
 		free(line);
 	}
-	if (!validate_se(head))
-		show_error();
 	return (head);
 }

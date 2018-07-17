@@ -43,10 +43,20 @@ int		is_comment(char *line)
 
 int 	room_type(char *line)
 {
-	if (ft_strequ(line, "##start"))
-		return (1);
-	else if (ft_strequ(line, "##end"))
-		return (2);
+	if (ft_strstr(line, "##start"))
+	{
+		if (ft_strequ(line, "##start"))
+			return (1);
+		else
+			show_error();
+	}
+	else if (ft_strstr(line, "##end"))
+	{
+		if (ft_strequ(line, "##end"))
+			return (2);
+		else
+			show_error();
+	}
 	return (0);
 }
 
