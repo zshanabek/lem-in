@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:44:12 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:45:09 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/17 21:00:22 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,9 +59,8 @@ void	get_rooms(t_room **head, char *line)
 	{
 		room = create_room();
 		arr = ft_strsplit(line, ' ');
-		if (!is_valid_name(*head, arr[0]))
-			show_error();
-		if (!is_digital(arr[1]) || !is_digital(arr[2]))
+		if (!is_valid_name(*head, arr[0]) ||
+		!is_digital(arr[1]) || !is_digital(arr[2]))
 			show_error();
 		room->name = ft_strdup(arr[0]);
 		room->x = ft_atoi(arr[1]);
