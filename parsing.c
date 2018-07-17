@@ -18,6 +18,20 @@ int		is_valid_name(t_room *head, char *name)
 	return (1);
 }
 
+int			unique_coordinates(t_room *head, int x, int y)
+{
+	t_room *cur;
+
+	cur = head;
+	while (cur != NULL)
+	{
+		if (cur->x == x && cur->y == y)
+			return (0);
+		cur = cur->next;
+	}
+	return (1);
+}
+
 void	get_ants_amount(int *amount, char *line)
 {
 	intmax_t temp;
@@ -71,7 +85,9 @@ void	get_rooms(t_room **head, char *line)
 			show_error();
 		room->name = arr[0];
 		room->x = ft_atoi(arr[1]);
-		room->y = ft_atoi(arr[2]);		
+		room->y = ft_atoi(arr[2]);
+		if (!unique_coordinates(*head, room->x, room->y))
+			show_error();	
 		room->type = type;
 		ft_lstaddendroom(head, room);
 		type = 0;
@@ -136,7 +152,7 @@ t_room	*parse(int *amount)
 		ft_printf("%s\n", line);
 		free(line);
 	}
-	if (line == NULL)
+	if (!validate_se(head))
 		show_error();
 	return (head);
 }

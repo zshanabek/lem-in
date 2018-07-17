@@ -50,7 +50,7 @@ void	create_links(t_room *h, int *flag, char *line)
 	char 		**arr;
 
 	i = 0;
-	if (*flag == 0 && !validate_se(h))
+	if (!validate_se(h))
 		show_error();
 	*flag = 1;
 	arr = ft_strsplit(line, '-');
