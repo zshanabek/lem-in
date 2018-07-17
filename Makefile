@@ -1,6 +1,6 @@
 NAME = lem-in
 FLAGS = -Wall -Wextra -Werror
-SRC	= start.c parsing.c links.c helpers.c algorithm.c quit.c utils.c
+SRC	= start.c parsing.c links.c helpers.c algorithm.c quit.c utils.c auxil.c
 LIB	= ./libft/libft.a
 
 all: $(NAME)

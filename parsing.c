@@ -1,36 +1,16 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   parsing.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/17 20:44:12 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/07/17 20:45:09 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem-in.h"
-
-int		is_valid_name(t_room *head, char *name)
-{
-	t_room *cur;
-
-	if (name[0] == 'L' || name[0] == '#')
-		return (0);
-	if (ft_strchr(name, '-') != 0)
-		return (0);
-	cur = head;
-	while (cur != NULL)
-	{
-		if (ft_strequ(cur->name, name))
-			return (0);
-		cur = cur->next;
-	}
-	return (1);
-}
-
-int			unique_coordinates(t_room *head, int x, int y)
-{
-	t_room *cur;
-
-	cur = head;
-	while (cur != NULL)
-	{
-		if (cur->x == x && cur->y == y)
-			return (0);
-		cur = cur->next;
-	}
-	return (1);
-}
 
 void	get_ants_amount(int *amount, char *line)
 {
@@ -53,7 +33,7 @@ void	get_ants_amount(int *amount, char *line)
 	free(line);
 }
 
-t_room *create_room()
+t_room	*create_room(void)
 {
 	t_room *room;
 
@@ -67,8 +47,8 @@ t_room *create_room()
 
 void	get_rooms(t_room **head, char *line)
 {
-	char 	**arr;
-	t_room	*room;
+	char		**arr;
+	t_room		*room;
 	static int	type;
 
 	if (type != 0 && (ft_strequ(line, "##start") || ft_strequ(line, "##end")))
@@ -95,28 +75,9 @@ void	get_rooms(t_room **head, char *line)
 	}
 }
 
-int	check_link(char *line)
+int		is_cmd_repeated(char *line)
 {
-	int i;
-
-	i = 0;
-	if (line[0] == '#')
-		return (0);
-	while (line[i] && line[i] != '-' && line[i] != ' ')
-		i++;
-	if (line[i] != '-')
-		return (0);
-	i++;
-	while (line[i] && line[i] != '-' && line[i] != ' ')
-		i++;
-	if (line[i] != 0)
-		return (0);
-	return (1);
-}
-
-int			is_cmd_repeated(char *line)
-{
-	int			type;	
+	int			type;
 	static int	i;
 	static int	j;
 
@@ -132,7 +93,7 @@ int			is_cmd_repeated(char *line)
 
 t_room	*parse(int *amount)
 {
-	int		flag;	
+	int		flag;
 	char	*line;
 	t_room	*head;
 

@@ -1,11 +1,23 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   start.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/17 20:43:54 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/07/17 20:43:56 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem-in.h"
 
 static void		ft_roomlstdel(t_room **head)
 {
-	t_room		*cur;	
+	t_room		*cur;
 	t_room		*temp;
 	t_sosed		*scur;
-	t_sosed		*stemp;	
+	t_sosed		*stemp;
 
 	if (!head)
 		return ;
@@ -28,7 +40,7 @@ static void		ft_roomlstdel(t_room **head)
 	*head = NULL;
 }
 
-int			list_length(t_room *item)
+static int		list_length(t_room *item)
 {
 	int		size;
 	t_room	*cur;
@@ -43,9 +55,9 @@ int			list_length(t_room *item)
 	return (size);
 }
 
-t_ants *create_ants_list(intmax_t amount)
+static t_ants	*create_ants_list(intmax_t amount)
 {
-	int		i;	
+	int		i;
 	t_ants	*start;
 	t_ants	*ant;
 
@@ -63,7 +75,7 @@ t_ants *create_ants_list(intmax_t amount)
 	return (start);
 }
 
-void	iterate_list(t_room *start, int len)
+static void		iterate_list(t_room *start, int len)
 {
 	int		i;
 	int		j;
@@ -88,20 +100,19 @@ void	iterate_list(t_room *start, int len)
 	}
 }
 
-int		main(void)
+int				main(void)
 {
 	int			len;
 	int			amount;
+	int			*path;
 	t_ants		*ants;
 	t_room		*rooms;
-	int			*path;
-	
+
 	rooms = parse(&amount);
 	if (!validate_se(rooms))
 		show_error();
 	len = list_length(rooms);
 	iterate_list(rooms, len);
-	// print_list(rooms);
 	algorithm(rooms, len);
 	path = get_end(rooms)->way;
 	ft_putchar('\n');

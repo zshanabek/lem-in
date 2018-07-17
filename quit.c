@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   quit.c                                             :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/17 20:55:16 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/07/17 20:56:50 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem-in.h"
 
 void	move_ants(t_ants *head, int len)
@@ -5,7 +17,7 @@ void	move_ants(t_ants *head, int len)
 	int			s;
 	t_ants		*cur;
 	static int	i;
-	
+
 	i++;
 	s = 0;
 	cur = head;
@@ -20,7 +32,7 @@ void	move_ants(t_ants *head, int len)
 
 void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 {
-	int		ok;	
+	int		ok;
 	t_ants	*current;
 
 	ok = 0;
@@ -31,20 +43,20 @@ void	print_ants_step(t_ants *head, t_room *rooms, int *path, int len)
 		{
 			if (path[current->pos] != -1)
 			{
-				ft_printf("{cyan}L%d-{eoc}{yellow}%s{eoc} ", current->id, 
+				ft_printf("{cyan}L%d-{eoc}{yellow}%s{eoc} ", current->id,
 				find_by_id(rooms, path[current->pos])->name);
-				ok = 1;				
+				ok = 1;
 			}
 		}
 		current = current->next;
 	}
 	if (ok)
-		ft_putchar('\n');		
+		ft_putchar('\n');
 }
 
 int		one_step(int *path, int len)
 {
-	int		i;	
+	int		i;
 	int		count;
 
 	i = 0;

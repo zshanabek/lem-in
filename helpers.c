@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   helpers.c                                          :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2018/07/17 20:58:11 by zshanabe          #+#    #+#             */
+/*   Updated: 2018/07/17 20:58:37 by zshanabe         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "lem-in.h"
 
 int		is_digital(char *line)
@@ -10,38 +22,13 @@ int		is_digital(char *line)
 	while (line[i])
 	{
 		if (!ft_isdigit(line[i]) && line[i] != '-')
-			return (0);			
+			return (0);
 		i++;
 	}
 	return (1);
 }
 
-int			two_spaces(char *line)
-{
-	int		i;
-	int		count;
-
-	i = 0;
-	count = 0;
-	while (line[i])
-	{
-		if (line[i] == ' ')
-			count++;
-		i++;
-	}
-	if (count == 2)
-		return (1);
-	return (0);
-}
-
-int		is_comment(char *line)
-{
-	if (line[0] == '#')
-		return (1);
-	return (0);
-}
-
-int 	room_type(char *line)
+int		room_type(char *line)
 {
 	if (ft_strstr(line, "##start"))
 	{

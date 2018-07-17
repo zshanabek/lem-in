@@ -54,5 +54,7 @@ int 		room_type(char *line);
 int			check_link(char *line);
 int			is_digital(char *line);
 int			two_spaces(char *line);
+int			is_valid_name(t_room *head, char *name);
+int			unique_coordinates(t_room *head, int x, int y);
 
 #endif
