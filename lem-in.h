@@ -40,7 +40,7 @@ void		print_ants_list(t_ants *head);
 void		ft_lstaddendroom(t_room **head, t_room *item);
 void		ft_lstaddendsosed(t_sosed **head, t_sosed *item);
 void		algorithm(t_room *start, int len);
-void		iterate_list(t_room *start, int len);
+void		iterate_list(t_room *elem);
 void		exit_ants(t_ants *start, t_room *rooms, int len);
 void		print_path(t_room *head, int *path, int len);
 int			validate_se(t_room *head);

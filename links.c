@@ -45,7 +45,6 @@ int			validate_se(t_room *head)
 void	create_links(t_room *h, int *flag, char *line)
 {
 	int			i;
-	char		*temp;
 	t_room		*room2;
 	t_room		*room1;
 	char 		**arr;
@@ -56,7 +55,7 @@ void	create_links(t_room *h, int *flag, char *line)
 	*flag = 1;
 	arr = ft_strsplit(line, '-');
 	if ((room1 = search(h, arr[0])) == 0)
-		show_error("room1 not found");
+		show_error();
 	if ((room2 = search(h, arr[1])) == 0)
 		show_error();
 	create_link(room1, room2);

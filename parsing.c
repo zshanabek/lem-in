@@ -18,12 +18,13 @@ int		is_valid_name(t_room *head, char *name)
 	return (1);
 }
 
-
-
-void	get_ants_amount(int *amount, int *fline, char *line)
+void	get_ants_amount(int *amount, char *line)
 {
 	intmax_t temp;
 
+	*amount = -1;
+	if (get_next_line(0, &line) != 1)
+		show_error();
 	if (!is_comment(line) && is_digital(line))
 	{
 		temp = ft_atoi(line);
@@ -34,6 +35,8 @@ void	get_ants_amount(int *amount, int *fline, char *line)
 	}
 	else
 		show_error();
+	ft_printf("%s\n", line);
+	free(line);
 }
 
 t_room *create_room()
@@ -50,12 +53,12 @@ t_room *create_room()
 
 void	get_rooms(t_room **head, char *line)
 {
-	int		i;
-	char	*name;
 	char 	**arr;
 	t_room	*room;
 	static int	type;
 
+	if (type != 0 && (ft_strequ(line, "##start") || ft_strequ(line, "##end")))
+		show_error();
 	type = (ft_strequ(line, "##start")) ? 1 : type;
 	type = (ft_strequ(line, "##end")) ? 2 : type;
 	if (two_spaces(line))
@@ -100,7 +103,6 @@ int			is_cmd_repeated(char *line)
 	static int	i;
 	static int	j;
 
-	type = 0;
 	type = room_type(line);
 	if (type == 1)
 		i++;
@@ -113,20 +115,18 @@ int			is_cmd_repeated(char *line)
 
 t_room	*parse(int *amount)
 {
-	int 	fline;
 	int		flag;	
 	char	*line;
 	t_room	*head;
 
-	*amount = -1;
 	flag = 0;
 	head = NULL;
+	line = NULL;
+	get_ants_amount(amount, line);
 	while (get_next_line(0, &line))
 	{
-		if (!is_cmd_repeated(line))
+		if (flag == 0 && !is_cmd_repeated(line))
 			show_error();
-		if (*amount == -1)
-			get_ants_amount(amount, &fline, line);
 		else if (flag == 0 && (two_spaces(line) || room_type(line) != 0))
 			get_rooms(&head, line);
 		else if (check_link(line))
@@ -136,5 +136,7 @@ t_room	*parse(int *amount)
 		ft_printf("%s\n", line);
 		free(line);
 	}
+	if (line == NULL)
+		show_error();
 	return (head);
 }

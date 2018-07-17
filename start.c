@@ -43,29 +43,22 @@ int			list_length(t_room *item)
 	return (size);
 }
 
-void	iterate_list(t_room *start, int len)
+void	iterate_list(t_room *elem)
 {
-	int		i;
 	int		j;
-	int		*way;
-	t_room	*cur;
+	static int i;
+	int 	*way;
 
-	i = 0;
-	cur = start;
-	while (cur != NULL)
+	j = 0;
+	way = malloc(sizeof(int) * 30);
+	while (j < 30)
 	{
-		j = 0;
-		way = malloc(sizeof(int) * len);
-		while (j < len)
-		{
-			way[j] = -1;
-			j++;
-		}
-		cur->way = way;
-		cur->id = i;
-		cur = cur->next;
-		i++;
+		way[j] = -1;
+		j++;
 	}
+	elem->way = way;
+	elem->id = i;
+	i++;
 }
 
 t_ants *create_ants_list(intmax_t amount)
@@ -88,6 +81,17 @@ t_ants *create_ants_list(intmax_t amount)
 	return (start);
 }
 
+void	ft_roomlstiter(t_room *lst, void (*f)(t_room *elem))
+{
+	if (!lst)
+		return ;
+	while (lst)
+	{
+		f(lst);
+		lst = lst->next;
+	}
+}
+
 int		main(void)
 {
 	int			len;
@@ -98,7 +102,7 @@ int		main(void)
 	
 	rooms = parse(&amount);
 	len = list_length(rooms);
-	iterate_list(rooms, len);
+	ft_roomlstiter(rooms, iterate_list);
 	// print_list(rooms);
 	algorithm(rooms, len);
 	path = get_end(rooms)->way;
