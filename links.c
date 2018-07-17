@@ -48,27 +48,17 @@ void	create_links(t_room *h, int *flag, char *line)
 	char		*temp;
 	t_room		*room2;
 	t_room		*room1;
+	char 		**arr;
 
 	i = 0;
 	if (*flag == 0 && !validate_se(h))
 		show_error();
 	*flag = 1;
-	while (line[i] && line[i] != '-')
-		i++;
-	temp = ft_strsub(line, 0, i);
-	if ((room1 = search(h, temp)) == 0)
-	{
-		free(temp);
+	arr = ft_strsplit(line, '-');
+	if ((room1 = search(h, arr[0])) == 0)
+		show_error("room1 not found");
+	if ((room2 = search(h, arr[1])) == 0)
 		show_error();
-	}
-	free(temp);
-	temp = ft_strsub(line, ++i, ft_strlen(line));
-	if ((room2 = search(h, temp)) == 0)
-	{
-		free(temp);
-		show_error();
-	}
-	free(temp);	
 	create_link(room1, room2);
 	create_link(room2, room1);
 }

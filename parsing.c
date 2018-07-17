@@ -80,6 +80,8 @@ int	check_link(char *line)
 	int i;
 
 	i = 0;
+	if (line[0] == '#')
+		return (0);
 	while (line[i] && line[i] != '-' && line[i] != ' ')
 		i++;
 	if (line[i] != '-')
