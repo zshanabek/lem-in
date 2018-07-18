@@ -6,15 +6,15 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:57:07 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 21:04:52 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 11:24:10 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	show_error(char *error_message)
 {
-	ft_printf("Error: %s\n", error_message);
+	ft_printf("ERROR: %s\n", error_message);
 	exit(1);
 }
 

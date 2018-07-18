@@ -6,11 +6,11 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:44:12 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/18 10:20:19 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 12:28:56 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	get_ants_amount(int *amount, char *line)
 {
@@ -25,7 +25,7 @@ void	get_ants_amount(int *amount, char *line)
 		if (temp <= 2147483647 && temp > 0)
 			*amount = temp;
 		else
-			show_error("Ants amount isn't in int range");
+			show_error("Ants amount isn't in int positive range");
 	}
 	else
 		show_error("Invalid ants line");
@@ -59,13 +59,13 @@ void	get_rooms(t_room **head, char *line)
 	{
 		room = create_room();
 		arr = ft_strsplit(line, ' ');
-		if (!is_valid_name(*head, arr[0]) ||
-		!is_digital(arr[1]) || !is_digital(arr[2]))
+		if (!is_valid_name(*head, arr[0]))
 			show_error("Invalid room");
+		if (!is_digital(arr[1]) || !is_digital(arr[2]))
+			show_error("Invalid room coordinates");
 		room->name = ft_strdup(arr[0]);
-		room->x = ft_atoi(arr[1]);
-		room->y = ft_atoi(arr[2]);
-		if (!unique_coordinates(*head, room->x, room->y))
+		if (!uni_coord(*head, room, ft_atoimax(arr[1]),
+		ft_atoimax(arr[2])))
 			show_error("Not unique coordinates");
 		ft_del2darr(arr);
 		room->type = type;

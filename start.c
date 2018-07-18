@@ -6,11 +6,11 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:43:54 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/18 09:47:28 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 11:59:34 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 static void		ft_roomlstdel(t_room **head)
 {

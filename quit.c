@@ -6,11 +6,11 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:55:16 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:56:50 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 12:00:30 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 void	move_ants(t_ants *head, int len)
 {

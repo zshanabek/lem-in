@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/18 10:11:53 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/18 10:14:40 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 12:28:34 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,6 @@ int						check_link(char *line);
 int						is_digital(char *line);
 int						two_spaces(char *line);
 int						is_valid_name(t_room *head, char *name);
-int						unique_coordinates(t_room *head, int x, int y);
+int						uni_coord(t_room *h, t_room *e, intmax_t x, intmax_t y);
 
 #endif

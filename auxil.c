@@ -6,11 +6,11 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:59:04 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:59:05 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 12:30:57 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		is_valid_name(t_room *head, char *name)
 {
@@ -30,10 +30,18 @@ int		is_valid_name(t_room *head, char *name)
 	return (1);
 }
 
-int		unique_coordinates(t_room *head, int x, int y)
+int		uni_coord(t_room *head, t_room *elem, intmax_t x, intmax_t y)
 {
 	t_room *cur;
 
+	if (x <= 2147483647 && x >= -2147483648 && y <= 2147483647 &&
+	y >= -2147483648)
+	{
+		elem->x = x;
+		elem->y = y;
+	}
+	else
+		show_error("Room coordinates aren't in integer range");
 	cur = head;
 	while (cur != NULL)
 	{

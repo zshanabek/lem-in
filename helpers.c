@@ -6,11 +6,11 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:58:11 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 21:05:28 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 10:40:53 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "lem-in.h"
+#include "lem_in.h"
 
 int		is_digital(char *line)
 {
