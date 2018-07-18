@@ -34,9 +34,6 @@ struct s_ants
 
 t_room		*find_by_id(t_room *start, int id);
 t_room		*parse(int *amount);
-void		print_struct_members(t_room *item);
-void		print_list(t_room *head);
-void		print_ants_list(t_ants *head);
 void		ft_lstaddendroom(t_room **head, t_room *item);
 void		ft_lstaddendsosed(t_sosed **head, t_sosed *item);
 void		algorithm(t_room *start, int len);
