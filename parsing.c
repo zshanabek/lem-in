@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:44:12 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/18 09:51:41 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 10:20:19 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ void	get_ants_amount(int *amount, char *line)
 		show_error("Invalid ants line");
 	if (!is_comment(line) && is_digital(line))
 	{
-		temp = ft_atoi(line);
+		temp = ft_atoimax(line);
 		if (temp <= 2147483647 && temp > 0)
 			*amount = temp;
 		else
