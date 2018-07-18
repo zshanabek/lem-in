@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:54:09 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:54:59 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/17 21:06:51 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -82,13 +82,13 @@ void	create_links(t_room *h, int *flag, char *line)
 
 	i = 0;
 	if (!validate_se(h))
-		show_error();
+		show_error("No start or end room");
 	*flag = 1;
 	arr = ft_strsplit(line, '-');
 	if ((room1 = search(h, arr[0])) == 0)
-		show_error();
+		show_error("There is no room");
 	if ((room2 = search(h, arr[1])) == 0)
-		show_error();
+		show_error("There is no room");
 	create_link(room1, room2);
 	create_link(room2, room1);
 	ft_del2darr(arr);

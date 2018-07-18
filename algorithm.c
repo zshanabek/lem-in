@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:17:08 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:17:09 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:46:57 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -94,5 +94,5 @@ void	algorithm(t_room *head, int len)
 	while (i < len && !bfs(head, queue, queue[i], len))
 		i++;
 	if (get_end(head)->way[0] != start->id)
-		show_error();
+		show_error("There is no available path");
 }

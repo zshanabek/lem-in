@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:44:12 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 21:00:22 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:51:41 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,17 @@ void	get_ants_amount(int *amount, char *line)
 
 	*amount = -1;
 	if (get_next_line(0, &line) != 1)
-		show_error();
+		show_error("Invalid ants line");
 	if (!is_comment(line) && is_digital(line))
 	{
 		temp = ft_atoi(line);
 		if (temp <= 2147483647 && temp > 0)
 			*amount = temp;
 		else
-			show_error();
+			show_error("Ants amount isn't in int range");
 	}
 	else
-		show_error();
+		show_error("Invalid ants line");
 	ft_printf("%s\n", line);
 	free(line);
 }
@@ -52,7 +52,7 @@ void	get_rooms(t_room **head, char *line)
 	static int	type;
 
 	if (type != 0 && (ft_strequ(line, "##start") || ft_strequ(line, "##end")))
-		show_error();
+		show_error("No start or end room provided");
 	type = (ft_strequ(line, "##start")) ? 1 : type;
 	type = (ft_strequ(line, "##end")) ? 2 : type;
 	if (two_spaces(line))
@@ -61,12 +61,12 @@ void	get_rooms(t_room **head, char *line)
 		arr = ft_strsplit(line, ' ');
 		if (!is_valid_name(*head, arr[0]) ||
 		!is_digital(arr[1]) || !is_digital(arr[2]))
-			show_error();
+			show_error("Invalid room");
 		room->name = ft_strdup(arr[0]);
 		room->x = ft_atoi(arr[1]);
 		room->y = ft_atoi(arr[2]);
 		if (!unique_coordinates(*head, room->x, room->y))
-			show_error();
+			show_error("Not unique coordinates");
 		ft_del2darr(arr);
 		room->type = type;
 		ft_lstaddendroom(head, room);
@@ -103,15 +103,15 @@ t_room	*parse(int *amount)
 	while (get_next_line(0, &line))
 	{
 		if (flag == 0 && !is_cmd_repeated(line))
-			show_error();
+			show_error("Start or end doubled");
 		else if (flag == 0 && (two_spaces(line) || room_type(line) != 0))
 			get_rooms(&head, line);
 		else if (check_link(line))
 			create_links(head, &flag, line);
 		else if (!is_comment(line))
-			show_error();
+			show_error("Invalid line");
 		if (room_type(line) != 0 && flag == 1)
-			show_error();
+			show_error("There should be no command in links part");
 		ft_printf("%s\n", line);
 		free(line);
 	}

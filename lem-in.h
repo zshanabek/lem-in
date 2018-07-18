@@ -43,7 +43,7 @@ void		algorithm(t_room *start, int len);
 void		exit_ants(t_ants *start, t_room *rooms, int len);
 void		print_path(t_room *head, int *path, int len);
 int			validate_se(t_room *head);
-void		show_error(void);
+void		show_error(char *message);
 int			is_comment(char *line);
 t_ants		*ft_lstaddendant(t_ants *head);
 int			is_everybody_outside(t_ants *start, int end);

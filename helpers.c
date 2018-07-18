@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:58:11 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:58:37 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/17 21:05:28 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,14 +35,14 @@ int		room_type(char *line)
 		if (ft_strequ(line, "##start"))
 			return (1);
 		else
-			show_error();
+			show_error("Invalid start command");
 	}
 	else if (ft_strstr(line, "##end"))
 	{
 		if (ft_strequ(line, "##end"))
 			return (2);
 		else
-			show_error();
+			show_error("Invalid end command");
 	}
 	return (0);
 }

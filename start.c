@@ -6,7 +6,7 @@
 /*   By: zshanabe <zshanabe@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2018/07/17 20:43:54 by zshanabe          #+#    #+#             */
-/*   Updated: 2018/07/17 20:43:56 by zshanabe         ###   ########.fr       */
+/*   Updated: 2018/07/18 09:47:28 by zshanabe         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -110,7 +110,7 @@ int				main(void)
 
 	rooms = parse(&amount);
 	if (!validate_se(rooms))
-		show_error();
+		show_error("Not enough data provided");
 	len = list_length(rooms);
 	iterate_list(rooms, len);
 	algorithm(rooms, len);
@@ -120,5 +120,4 @@ int				main(void)
 	ants = create_ants_list(amount);
 	exit_ants(ants, rooms, len);
 	ft_roomlstdel(&rooms);
-	system("leaks lem-in");
 }
