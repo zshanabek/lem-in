@@ -5,6 +5,10 @@ This program finds the shortest path from `start` vertice to `end` vertice in a 
 ## Getting Started
 
 ### Compiling
+Clone the repository
+```
+git clone --recurse-submodules -j8 git@github.com:zshanabek/lem-in.git 
+```
 Enter project
 ```
 cd lem-in
@@ -42,11 +46,14 @@ d-e
 ```
 
 It is composed of three parts:
-* The number of ants
-* The rooms
-* The links
-`a-b` is the edge between rooms `a` and `b`
+* **Number of ants**. In this case 3 is number of ants
+* **Rooms**. `a` and `b` are rooms
+* **Links**. `a-b` is the edge between rooms `a` and `b`
+
+
+
 `##start` The beginning of path. In this case `a` is a start room
+
 `##end` The exit from path. In this case `d` is a start room
 
 Comments can be anywhere but you have to specify the start and end rooms by putting the commands ##start and ##end before declaring the room.
