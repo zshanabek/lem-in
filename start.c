@@ -12,15 +12,15 @@
 
 #include "lem_in.h"
 
-static void		ft_roomlstdel(t_room **head)
+static void ft_roomlstdel(t_room **head)
 {
-	t_room		*cur;
-	t_room		*temp;
-	t_sosed		*scur;
-	t_sosed		*stemp;
+	t_room *cur;
+	t_room *temp;
+	t_sosed *scur;
+	t_sosed *stemp;
 
 	if (!head)
-		return ;
+		return;
 	cur = *head;
 	while (cur)
 	{
@@ -40,10 +40,10 @@ static void		ft_roomlstdel(t_room **head)
 	*head = NULL;
 }
 
-static int		list_length(t_room *item)
+static int list_length(t_room *item)
 {
-	int		size;
-	t_room	*cur;
+	int size;
+	t_room *cur;
 
 	size = 0;
 	cur = item;
@@ -55,11 +55,11 @@ static int		list_length(t_room *item)
 	return (size);
 }
 
-static t_ants	*create_ants_list(intmax_t amount)
+static t_ants *create_ants_list(intmax_t amount)
 {
-	int		i;
-	t_ants	*start;
-	t_ants	*ant;
+	int i;
+	t_ants *start;
+	t_ants *ant;
 
 	i = 2;
 	start = malloc(sizeof(t_ants *));
@@ -75,12 +75,12 @@ static t_ants	*create_ants_list(intmax_t amount)
 	return (start);
 }
 
-static void		iterate_list(t_room *start, int len)
+static void iterate_list(t_room *start, int len)
 {
-	int		i;
-	int		j;
-	int		*way;
-	t_room	*cur;
+	int i;
+	int j;
+	int *way;
+	t_room *cur;
 
 	i = 0;
 	cur = start;
@@ -100,13 +100,13 @@ static void		iterate_list(t_room *start, int len)
 	}
 }
 
-int				main(void)
+int main(void)
 {
-	int			len;
-	int			amount;
-	int			*path;
-	t_ants		*ants;
-	t_room		*rooms;
+	int len;
+	int amount;
+	int *path;
+	t_ants *ants;
+	t_room *rooms;
 
 	rooms = parse(&amount);
 	if (!validate_se(rooms))
@@ -117,7 +117,7 @@ int				main(void)
 	path = get_end(rooms)->way;
 	ft_putchar('\n');
 	print_path(rooms, path, len);
-	ants = create_ants_list(amount);
-	exit_ants(ants, rooms, len);
+	// ants = create_ants_list(amount);
+	// exit_ants(ants, rooms, len);
 	ft_roomlstdel(&rooms);
 }
