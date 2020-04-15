@@ -56,6 +56,4 @@ It is composed of three parts:
 
 `##end` The exit from path. In this case `d` is a start room
 
-Comments can be anywhere but you have to specify the start and end rooms by putting the commands ##start and ##end before declaring the room.
-
-The program prints the shortest path from `start` room to `end`.
+Comments can be anywhere but you have to specify the start and end rooms by putting the commands `##start` and `##end` before declaring the room.
