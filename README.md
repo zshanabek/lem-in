@@ -7,7 +7,7 @@ This program finds the shortest path from `start` vertice to `end` vertice in a 
 ### Compiling
 Clone the repository
 ```
-git clone --recurse-submodules -j8 git@github.com:zshanabek/lem-in.git 
+git clone --recurse-submodules -j8 https://github.com/zshanabek/lem-in.git
 ```
 Enter project
 ```
