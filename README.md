@@ -63,6 +63,6 @@ It is composed of three parts:
 
 `##start` The beginning of path. In this case `a` is a start room
 
-`##end` The exit from path. In this case `d` is a start room
+`##end` The exit from path. In this case `d` is a end room
 
 Comments can be anywhere but you have to specify the start and end rooms by putting the commands `##start` and `##end` before declaring the room.
